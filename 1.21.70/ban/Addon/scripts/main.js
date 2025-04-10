@@ -2,7 +2,7 @@ import { ScoreboardIdentityType, system, world, } from "@minecraft/server"
 import { ModalFormData, ActionFormData, FormCancelationReason, ModalFormResponse, ActionFormResponse, } from "@minecraft/server-ui"
 
 system.beforeEvents.watchdogTerminate.subscribe((data) => (data.cancel = true))
-world.sendMessage(`§c§lBan/UnBan§r§f just reloaded`)
+system.run(() => world.sendMessage(`§c§lBan/UnBan§r§f just reloaded`))
 
 world.afterEvents.chatSend.subscribe((data) => {
     const { sender, message } = data
@@ -29,7 +29,7 @@ world.afterEvents.chatSend.subscribe((data) => {
                         sender.sendMessage(`§r§7${ta} ถูกแบนไปแล้ว\nแบนโดย: ${ban_find.split("|")[3]}\nด้วยเหตุผล: ${ban_find.split("|")[2]}\nเวลา: ${linux_to_time(ban_find.split("|")[4])}`)
                         return
                     }
-                    sender.runCommandAsync(`scoreboard players set "ban|${ta.toLowerCase()}|${`ไม่ได้ระบุเหตุผล`}|${sender.name}|${linux_time()}" banlist 0`)
+                    sender.runCommand(`scoreboard players set "ban|${ta.toLowerCase()}|${`ไม่ได้ระบุเหตุผล`}|${sender.name}|${linux_time()}" banlist 0`)
                     let plr = world.getAllPlayers().find(key => key.name.toLowerCase().trim() === ta.trim().toLowerCase())
                     request_ban(plr)
                     sender.sendMessage(`§fแบนผู้เล่น ${ta} แล้ว`)
@@ -41,7 +41,7 @@ world.afterEvents.chatSend.subscribe((data) => {
                         sender.sendMessage(`§r§7${ta} ไม่ได้ถูกแบน ลองใช้คำสั่ง !list เพื่อดูคนที่ถูกแบน หรือปลดแบนผ่านเมนูโดย !ui`)
                         return
                     }
-                    sender.runCommandAsync(`scoreboard players reset "${ban_find}" banlist`)
+                    sender.runCommand(`scoreboard players reset "${ban_find}" banlist`)
                     sender.sendMessage(`§aปลดแบนผู้เล่น ${ta} แล้ว`)
                 }
                 if (
@@ -121,7 +121,7 @@ function admin_ui(pl) {
                                         )}`
                                     )
                                 } else {
-                                    pl.runCommandAsync(`scoreboard players set "ban|${name.toLowerCase()}|${res1.formValues[1] || `ไม่ได้ระบุเหตุผล`}|${pl.name}|${linux_time()}" banlist 0`)
+                                    pl.runCommand(`scoreboard players set "ban|${name.toLowerCase()}|${res1.formValues[1] || `ไม่ได้ระบุเหตุผล`}|${pl.name}|${linux_time()}" banlist 0`)
                                     pl.sendMessage(`§r§fได้ทำการแบนผู้เล่น §o${name}§r§f เรียบร้อยแล้ว`)
                                     try {
                                         let fp = world.getAllPlayers().find(na => na.name.toLowerCase().trim() === name.toLowerCase().trim())
@@ -152,7 +152,7 @@ function admin_ui(pl) {
                                             )}`
                                         )
                                     } else {
-                                        pl.runCommandAsync(`scoreboard players set "ban|${resu[0].toLowerCase()}|${resu[1] || `ไม่ได้ระบุเหตุผล`}|${pl.name}|${linux_time()}" banlist 0`)
+                                        pl.runCommand(`scoreboard players set "ban|${resu[0].toLowerCase()}|${resu[1] || `ไม่ได้ระบุเหตุผล`}|${pl.name}|${linux_time()}" banlist 0`)
                                         pl.sendMessage(`§r§fได้ทำการแบนผู้เล่น §o${resu[0]}§r§f เรียบร้อยแล้ว`)
                                         request_ban(world.getAllPlayers().find((key) => key.name.toLowerCase().trim() === resu[0].trim().toLowerCase()))
                                     }
@@ -173,7 +173,7 @@ function admin_ui(pl) {
                     form.dropdown(`เลือกผู้เล่นที่ต้องการปลดแบน`, dis)
                     forceShow(pl, form).then((res) => {
                         if (res.canceled) return
-                        pl.runCommandAsync(`scoreboard players reset "${all[res?.formValues[0]]}" banlist`)
+                        pl.runCommand(`scoreboard players reset "${all[res?.formValues[0]]}" banlist`)
                         pl.sendMessage(`§fปลดแบน ${all[res?.formValues[0]].split("|")[1]} แล้ว`)
                     })
                     break
@@ -197,25 +197,20 @@ function request_ban(pl) {
     wait(20).then(() => {
         const ban = getBan()
         const find = ban.find(key => key.split("|")[1].toLowerCase().trim() === pl.name.trim().toLowerCase())
-        if(!find) return
+        if (!find) return
         world.getDimension("overworld").runCommand(`kick "${pl.name}" \n§r\n คุณถูกแบนจากเซิร์ฟเวอร์ด้วยเหตุผล: ${find.split("|")[2]}\nแบนโดย: ${find.split("|")[3]}\nเวลา: ${linux_to_time(find.split("|")[4])}`)
     })
 
 }
 
-createScore("banlist")
 function createScore(scoreboardName) {
     if (world.scoreboard.getObjective(scoreboardName)) return
     world.scoreboard.addObjective(scoreboardName, scoreboardName)
 }
 
-function getBan() {
-    return getFakePlayer("banlist").filter(key => key.startsWith(`ban|`)) || []
-}
-
-function linux_time() {
-    return Math.floor(new Date().getTime() / 1000)
-}
+system.run(() => createScore("banlist"))
+const getBan = () => getFakePlayer("banlist").filter(key => key.startsWith(`ban|`)) || []
+const linux_time = () => Math.floor(new Date().getTime() / 1000)
 
 function getFakePlayer(objectiveId) {
     return world.scoreboard

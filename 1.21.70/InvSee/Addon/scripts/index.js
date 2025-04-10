@@ -18,10 +18,3 @@ export function commandHandler(player, message) {
 
     if (cmd === "invsee") invsee(message, args)
 }
-
-/**
- * @author "aitji."
- * @youtube AitJi Gamer
- * @copyright 2022-2023
- * @settings เปิด Beta API ด้วยนะ :>
- */

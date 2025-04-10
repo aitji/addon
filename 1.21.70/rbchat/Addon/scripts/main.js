@@ -4,9 +4,11 @@ const obj = "rbchat"
 const debug = false
 
 system.beforeEvents.watchdogTerminate.subscribe(data => data.cancel = true)
-world.sendMessage(`§7§l| §r§9RBChat§f has been §cReloaded§r`)
-cs(String(obj))
-cs(String(`${obj}.setting`))
+system.run(() => {
+    world.sendMessage(`§7§l| §r§9RBChat§f has been §cReloaded§r`)
+    cs(String(obj))
+    cs(String(`${obj}.setting`))
+})
 
 world.beforeEvents.itemUse.subscribe((data) => {
     const pl = data.source
@@ -19,7 +21,7 @@ world.beforeEvents.itemUse.subscribe((data) => {
                 sound_, soundType_, soundLength_,
                 maxLine_, below_, colorBoo_, base_
             } = gvIng()
-            
+
             form.title(`§l§pRB Chat's§r Setting`)
             form.textField(`§m»§f ระยะเวลาก่อน§mแชทจะหาย§fไป\n§7(โดยใช้ §ltick§r§7 | โดยที่ §l20tick§r§7 เท่ากับ §l1s§r§7)`, `เช่น › §l60§r`, hide_)
             form.textField(`§4»§f จำนวนข้อความสูงสุดที่แสดงก่อนจะ§4ถูกตัด`, `เช่น › §l16§r`, maxMsg_)
@@ -33,26 +35,24 @@ world.beforeEvents.itemUse.subscribe((data) => {
             form.textField(`§a»§f สไตล์หน้าข้อความ`, `เช่น › §o§l$§r§oo§r §r§7$=unicode(U+00A7)`, base_)
             form.show(pl).then(async (res) => {
                 if (res.canceled) return
-                await ap(10)
-                pl.runCommandAsync(`playsound random.pop @s`)
+                pl.runCommand(`playsound random.pop @s`)
                 pl.sendMessage(`§e» §fกำลัง§l§eบันทึกข้อมูล§r§f กรุณารอ§e§lสักครู่§r§f. .`)
                 try {
-                    await ap(25)
-                    await pl.runCommandAsync(`scoreboard players reset * rbchat.setting`)
-                    await pl.runCommandAsync(`scoreboard players set "hide|${res.formValues[0]}" rbchat.setting 0`)
-                    await pl.runCommandAsync(`scoreboard players set "maxMsg|${res.formValues[1]}" rbchat.setting 1`)
-                    await pl.runCommandAsync(`scoreboard players set "cutoffMsg|${res.formValues[2]}" rbchat.setting 2`)
-                    await pl.runCommandAsync(`scoreboard players set "sound|${cov(false, res.formValues[3])}" rbchat.setting 3`)
-                    await pl.runCommandAsync(`scoreboard players set "soundType|${res.formValues[4]}" rbchat.setting 4`)
-                    await pl.runCommandAsync(`scoreboard players set "soundLength|${res.formValues[5]}" rbchat.setting 5`)
-                    await pl.runCommandAsync(`scoreboard players set "maxLine|${res.formValues[6]}" rbchat.setting 6`)
-                    await pl.runCommandAsync(`scoreboard players set "below|${res.formValues[7]}" rbchat.setting 7`)
-                    await pl.runCommandAsync(`scoreboard players set "colorBoo|${cov(false, res.formValues[8])}" rbchat.setting 8`)
-                    await pl.runCommandAsync(`scoreboard players set "base|${res.formValues[9]}" rbchat.setting 9`)
+                    pl.runCommand(`scoreboard players reset * rbchat.setting`)
+                    pl.runCommand(`scoreboard players set "hide|${res.formValues[0]}" rbchat.setting 0`)
+                    pl.runCommand(`scoreboard players set "maxMsg|${res.formValues[1]}" rbchat.setting 1`)
+                    pl.runCommand(`scoreboard players set "cutoffMsg|${res.formValues[2]}" rbchat.setting 2`)
+                    pl.runCommand(`scoreboard players set "sound|${cov(false, res.formValues[3])}" rbchat.setting 3`)
+                    pl.runCommand(`scoreboard players set "soundType|${res.formValues[4]}" rbchat.setting 4`)
+                    pl.runCommand(`scoreboard players set "soundLength|${res.formValues[5]}" rbchat.setting 5`)
+                    pl.runCommand(`scoreboard players set "maxLine|${res.formValues[6]}" rbchat.setting 6`)
+                    pl.runCommand(`scoreboard players set "below|${res.formValues[7]}" rbchat.setting 7`)
+                    pl.runCommand(`scoreboard players set "colorBoo|${cov(false, res.formValues[8])}" rbchat.setting 8`)
+                    pl.runCommand(`scoreboard players set "base|${res.formValues[9]}" rbchat.setting 9`)
                     pl.sendMessage(`§a» §fบันทึกข้อมูล§a§lเรียบร้อย§r§fแล้ว!`)
-                    pl.runCommandAsync(`playsound random.orb @s`)
+                    pl.runCommand(`playsound random.orb @s`)
                 } catch (error) {
-                    pl.runCommandAsync(`playsound note.pling @s`)
+                    pl.runCommand(`playsound note.pling @s`)
                     pl.sendMessage(`§4[!]» §fบันทึกข้อมูล§4§lไม่สำเร็จ§r§fหรัสข้อผิดพลาด\n§7${error}`)
                 }
             })
@@ -60,20 +60,8 @@ world.beforeEvents.itemUse.subscribe((data) => {
     }
 })
 
-function ap(t) {
-    return new Promise((resolve) => {
-        system.runTimeout(resolve, t)
-    })
-}
-
-function cov(ntb, i) {
-    return ntb ? String(i) === "1" : i ? "1" : "0";
-}
-
-function os() {
-    return Math.floor(Date.now() / 1000)
-}
-
+const cov = (ntb, i) => ntb ? String(i) === "1" : i ? "1" : "0";
+const os = () => Math.floor(Date.now() / 1000)
 function gvIng(o = obj) {
     const l = get(`${o}.setting`);
     const gv = (k, v) => (
@@ -117,7 +105,7 @@ function get(id, end = "") {
 }
 
 function wR(cm = "testfor @s", as = false) {
-    if (as) world.getDimension("overworld").runCommandAsync(cm)
+    if (as) world.getDimension("overworld").runCommand(cm)
     else world.getDimension("overworld").runCommand(cm)
 }
 
@@ -144,8 +132,8 @@ system.runInterval(() => {
     plr.forEach(pl => {
 
         if (debug && pl.hasTag("test")) {
-            pl.runCommandAsync(`tag @s remove test`)
-            pl.runCommandAsync(`scoreboard players set "test▶${os()}▶${pl.name}" ${obj} ${Math.round(Number(hide_))}`)
+            pl.runCommand(`tag @s remove test`)
+            pl.runCommand(`scoreboard players set "test▶${os()}▶${pl.name}" ${obj} ${Math.round(Number(hide_))}`)
         }
         allMsg = get(obj, `▶${pl.name}`) || []
         if (allMsg.length == 0) {
@@ -197,7 +185,7 @@ world.beforeEvents.chatSend.subscribe(async (data) => {
 
     message = `${message.substring(0, Math.round(Number(maxMsg_)))}${message.length > Math.round(Number(maxMsg_)) ? cutoffMsg_ : ''}`
 
-    await sender.runCommandAsync(`scoreboard players set "${message}▶${os()}▶${sender.name}" ${obj} ${Math.round(Number(hide_))}`)
+    sender.runCommand(`scoreboard players set "${message}▶${os()}▶${sender.name}" ${obj} ${Math.round(Number(hide_))}`)
     if (debug) world.sendMessage(`§a: §o${message}▶${os()}▶${sender.name}§r §qadded`)
-    if (cov(true, sound_)) await sender.runCommandAsync(`playsound ${soundType_} @a[r=${soundLength_}]`)
+    if (cov(true, sound_)) sender.runCommand(`playsound ${soundType_} @a[r=${soundLength_}]`)
 })

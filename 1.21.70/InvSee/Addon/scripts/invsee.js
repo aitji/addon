@@ -52,10 +52,3 @@ export function invsee(message, args) {
     }
     player.endMessage(`§r§c§l§ฟ*-*-*-*-*-*-*-*-*§r\n${inventory}§r§c§l§ฟ*-*-*-*-*-*-*-*-*§r`)
 }
-
-/**
- * @author "aitji."
- * @youtube AitJi Gamer
- * @copyright 2022-2023
- * @settings เปิด Beta API ด้วยนะ :>
- */

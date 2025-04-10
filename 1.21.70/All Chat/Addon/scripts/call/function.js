@@ -52,11 +52,7 @@ export function createScore(scoreboardName) {
  * @param {Number} data 
  * @returns {Boolean}
  */
-export function toBool(data) {
-    if (data === 0) return false
-    if (data === 1) return true
-    return false
-}
+export const toBool = v => v === 1 || v === true
 /** _______________________________________________________________ */
 /**
  * @param {Boolean} data 

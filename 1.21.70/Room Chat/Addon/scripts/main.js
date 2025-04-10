@@ -2,10 +2,12 @@
 import { world, system, ScoreboardIdentityType } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 system.beforeEvents.watchdogTerminate.subscribe(data => data.cancel = true);
-world.sendMessage(`§l§8| §r§fServer[Chat Room] has been §c§lLoaded!!`)
 /** ________________________________________________________ */
-createScore("chatroom")
-createScore("chatroomSetting")
+system.run(() => {
+    world.sendMessage(`§l§8| §r§fServer[Chat Room] has been §c§lLoaded!!`)
+    createScore("chatroom")
+    createScore("chatroomSetting")
+})
 function createScore(scoreboardName) {
     if (world.scoreboard.getObjective(scoreboardName)) return
     world.scoreboard.addObjective(scoreboardName, scoreboardName)
@@ -55,13 +57,13 @@ world.beforeEvents.itemUse.subscribe((data) => {
             form.show(pl).then(res => {
                 if (res.canceled) return
                 const resu = res.formValues
-                pl.runCommandAsync(`scoreboard players reset * chatroomSetting`)
-                pl.runCommandAsync(`scoreboard players set allSeeAdmin chatroomSetting 0`)
-                pl.runCommandAsync(`scoreboard players set adminSeeAll chatroomSetting 0`)
+                pl.runCommand(`scoreboard players reset * chatroomSetting`)
+                pl.runCommand(`scoreboard players set allSeeAdmin chatroomSetting 0`)
+                pl.runCommand(`scoreboard players set adminSeeAll chatroomSetting 0`)
 
-                pl.runCommandAsync(`scoreboard players set "kingTag⌁${resu[0] ?? `king`}" chatroomSetting 0`)
-                pl.runCommandAsync(`scoreboard players set allSeeAdmin chatroomSetting ${boolTo(resu[1])}`)
-                pl.runCommandAsync(`scoreboard players set adminSeeAll chatroomSetting ${boolTo(resu[2])}`)
+                pl.runCommand(`scoreboard players set "kingTag⌁${resu[0] ?? `king`}" chatroomSetting 0`)
+                pl.runCommand(`scoreboard players set allSeeAdmin chatroomSetting ${boolTo(resu[1])}`)
+                pl.runCommand(`scoreboard players set adminSeeAll chatroomSetting ${boolTo(resu[2])}`)
 
                 pl.sendMessage(`§fChat Distance is now §aSaved!§r`)
             })
@@ -115,7 +117,10 @@ world.beforeEvents.chatSend.subscribe((data) => {
         }
     });
 });
-system.runInterval(() => {
-    world.getDimension("overworld").runCommandAsync(`scoreboard players add @a chatroom 0`)
+
+world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
+    if (!initialSpawn) return
+    const chatroom = world.scoreboard.getObjective('chatroom')
+    chatroom.addScore(player, 0)
 })
 /** ________________________________________________________ */

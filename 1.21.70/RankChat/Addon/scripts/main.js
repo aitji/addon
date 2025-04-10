@@ -1,13 +1,15 @@
 import { ScoreboardIdentityType, system, world } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 system.beforeEvents.watchdogTerminate.subscribe(data => data.cancel = true);
-world.sendMessage(`§l§8| §r§fServer has been §cReloaded!!`)
 /** ________________________________________________________ */
-createScore("rankchat")
 function createScore(scoreboardName) {
     if (world.scoreboard.getObjective(scoreboardName)) return
     world.scoreboard.addObjective(scoreboardName, scoreboardName)
 }
+system.run(() => {
+    world.sendMessage(`§l§8| §r§fServer has been §cReloaded!!`)
+    createScore("rankchat")
+})
 /** _________________________________________________________ */
 let RankPrefix = "rank:";
 let def = "§7Player";
@@ -82,20 +84,20 @@ function rsetting(pl) {
             if (chatprefix === "" || chatprefix === undefined) chatprefix = `chatprefix⌁${RankPrefix}`
             if (chatdef === "" || chatdef === undefined) chatdef = `chatdef⌁${def}`
 
-            pl.runCommandAsync(`scoreboard players reset * rankchat`)
+            pl.runCommand(`scoreboard players reset * rankchat`)
             const all = [chatprefix, chatdef]
             for (let i = 0; i < all.length; i++) {
                 var on = false
                 if (all[i] === chatprefix) {
-                    pl.runCommandAsync(`scoreboard players set "chatprefix⌁${res.formValues[0]}" rankchat ${i + 1}`)
+                    pl.runCommand(`scoreboard players set "chatprefix⌁${res.formValues[0]}" rankchat ${i + 1}`)
                     on = true
                 }
                 if (all[i] === chatdef) {
-                    pl.runCommandAsync(`scoreboard players set "chatdef⌁${res.formValues[1]}" rankchat ${i + 1}`)
+                    pl.runCommand(`scoreboard players set "chatdef⌁${res.formValues[1]}" rankchat ${i + 1}`)
                     on = true
                 }
 
-                if (on === false) pl.runCommandAsync(`scoreboard players set "${all[i]}" rankchat ${i + 1}`)
+                if (on === false) pl.runCommand(`scoreboard players set "${all[i]}" rankchat ${i + 1}`)
             }
             pl.sendMessage(`§fRank Chat is now §aSaved!§r`)
         })
