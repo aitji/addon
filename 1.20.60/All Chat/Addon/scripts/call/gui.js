@@ -46,7 +46,7 @@ export function rank_chat(pl) {
         if (chatdef === "" || chatdef === undefined) chatdef = def
         const form = new ModalFormData()
         form.title(`§l§8» §r§0RankChat §l§8«`)
-        form.textField(`§c§l»§r§c Subscribe §f@InwAitJi§r\n\n§l§a»§r§f Rank Chat §aPrefix§f ex: §o"rank:"§r\n§l§a»§r§l §aคำนำหน้า§fก่อน Rank เช่น §o"rank:"§r`, `ex: "${chatprefix ?? `rank:`}"`, chatprefix)
+        form.textField(`§c§l»§r§c Subscribe §f@aitji§r\n\n§l§a»§r§f Rank Chat §aPrefix§f ex: §o"rank:"§r\n§l§a»§r§l §aคำนำหน้า§fก่อน Rank เช่น §o"rank:"§r`, `ex: "${chatprefix ?? `rank:`}"`, chatprefix)
         form.textField(`§l§e»§r§f Rank Chat §eDefault§f ex: §o"§7Player§f"§r\n§l§e»§r§l §fยศ§eเริ่มต้น §fเช่น §o"§7ผู้เล่น§f"§r`, `ex: "${chatdef ?? `§7player`}"`, chatdef)
         form.show(pl).then(res => {
             if (res.canceled) return
@@ -102,7 +102,7 @@ export function chat_room(pl){
         const form = new ModalFormData()
 
         form.title(`§l§8» §r§0Chat Room §l§8«`)
-        form.textField(`§c§l»§r§c Subscribe §f@InwAitJi§r\n\n§l§a»§r§f ChatRoom §aKingTag§f ex: §o"king"§r`, `ex: "${kingTag ?? `king`}"`, kingTag)
+        form.textField(`§c§l»§r§c Subscribe §f@aitji§r\n\n§l§a»§r§f ChatRoom §aKingTag§f ex: §o"king"§r`, `ex: "${kingTag ?? `king`}"`, kingTag)
         form.toggle(`§e»§f Everyone See §e${kingTag ?? `king`}?`, allSeeAdmin ?? false)
         form.toggle(`§e» §e${kingTag ?? `king`} §fSee Everyone?`, adminSeeAll ?? false)
         form.show(pl).then(res => {
@@ -140,7 +140,7 @@ export function near_chat(pl) {
 
         const form = new ModalFormData()
         form.title(`§l§8» §r§0NearChat§8 «`)
-        form.textField(`§c» §cSubscribe §f@InwAitJi\n\n§l§a» §fกำหนดระยะของแชท:\n§7» §iไม่สามารถน้อยกว่า 0 ได้..`, `ex: "13"`, `${chatRang}`)
+        form.textField(`§c» §cSubscribe §f@aitji\n\n§l§a» §fกำหนดระยะของแชท:\n§7» §iไม่สามารถน้อยกว่า 0 ได้..`, `ex: "13"`, `${chatRang}`)
         form.toggle(`§l§fขึ้นข้อความเมื่อไม่ได้รับ§eข้อความ§fไหม§f:`, messageToggle)
         form.toggle(`§l§f"Admin" เห็นทุก§aข้อความ§f:`, AdminToggle)
         form.toggle(`§l§f"Admin" พิมพ์แล้ว§aเห็น§fทุกคน§f:`, TellAdminToggle)

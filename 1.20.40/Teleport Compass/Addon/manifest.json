@@ -8,8 +8,8 @@
 		"min_engine_version": [1, 20, 10]
 	},
 	"metadata": {
-		"authors": ["InwAitJi"],
-		"url": "https://www.youtube.com/@InwAitJi"
+		"authors": ["aitji"],
+		"url": "https://www.youtube.com/@aitji."
 	},
 	"modules": [{
 			"type": "data",

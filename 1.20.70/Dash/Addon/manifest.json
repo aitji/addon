@@ -2,14 +2,14 @@
 	"format_version": 2,
 	"header": {
 		"name": "§bApply §l§fDASH§r",
-		"description": "§l§fขอบคุณที่โหลดมาใช้นะ :)\n§c@InwAitJi - YT\n§bver: §f1.20.70",
+		"description": "§l§fขอบคุณที่โหลดมาใช้นะ :)\n§c@aitji - YT\n§bver: §f1.20.70",
 		"uuid": "6bcd047b-14bf-4087-ac81-7f34ec221bcb",
 		"version": [1, 20, 60],
 		"min_engine_version": [1, 20, 10]
 	},
 	"metadata": {
-		"authors": ["InwAitJi"],
-		"url": "https://www.youtube.com/@InwAitJi"
+		"authors": ["aitji"],
+		"url": "https://www.youtube.com/@aitji."
 	},
 	"modules": [{
 			"type": "data",
@@ -21,7 +21,7 @@
 			]
 		},
 		{
-			"description": "§l§fขอบคุณที่โหลดมาใช้นะ :)\n§c@InwAitJi - YT",
+			"description": "§l§fขอบคุณที่โหลดมาใช้นะ :)\n§c@aitji - YT",
 			"language": "javascript",
 			"type": "script",
 			"uuid": "08eaf01f-93fa-406e-a639-35876f6f45ac",

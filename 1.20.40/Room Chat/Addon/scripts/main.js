@@ -49,7 +49,7 @@ world.beforeEvents.itemUse.subscribe((data) => {
             const form = new ModalFormData()
 
             form.title(`§l§8» §r§7Chat Room §l§8«`)
-            form.textField(`§c§l»§r§c Subscribe §f@InwAitJi§r\n\n§l§a»§r§f ChatRoom §aKingTag§f ex: §o"king"§r`, `ex: "${kingTag ?? `king`}"`, kingTag)
+            form.textField(`§c§l»§r§c Subscribe §f@aitji§r\n\n§l§a»§r§f ChatRoom §aKingTag§f ex: §o"king"§r`, `ex: "${kingTag ?? `king`}"`, kingTag)
             form.toggle(`§e»§f Everyone See §e${kingTag ?? `king`}?`, allSeeAdmin ?? false)
             form.toggle(`§e» §e${kingTag ?? `king`} §fSee Everyone?`, adminSeeAll ?? false)
             form.show(pl).then(res => {

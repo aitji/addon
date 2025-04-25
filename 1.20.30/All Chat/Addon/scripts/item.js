@@ -19,7 +19,7 @@ function main_menu(pl) {
     system.run(() => {
         const form = new ActionFormData()
         form.title(`§bChat§f Combiner`)
-        form.body(`§c§l»§r§c Subscribe §f@InwAitJi\n\n§fเลือกแอดออนที่ต้องการแก้ไข`)
+        form.body(`§c§l»§r§c Subscribe §f@aitji\n\n§fเลือกแอดออนที่ต้องการแก้ไข`)
         form.button(`§lAnti §mSpam\n§rCLICK HERE`)
         form.button(`§l§eRank §r§lChat\n§rCLICK HERE`)
         form.button(`§l§9Chat §r§lRoom\n§rCLICK HERE`)

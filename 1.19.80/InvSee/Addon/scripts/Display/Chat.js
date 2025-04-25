@@ -10,7 +10,7 @@ world.events.beforeChat.subscribe(data => {
 })
 
 /**
- * @author "InwAitJi"
+ * @author "aitji"
  * @youtube AitJi Gamer
  * @copyright 2022-2023
  * @settings เปิด Beta API ด้วยนะ :>

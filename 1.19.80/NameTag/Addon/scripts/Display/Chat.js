@@ -1,6 +1,6 @@
 /** -------------------------------- */
 import { world } from "@minecraft/server"
-/** @ InwAitJi Script @ */
+/** @ aitji Script @ */
 /** -------------------------------- */
 world.events.beforeChat.subscribe(data =>{
     data.cancel = true;

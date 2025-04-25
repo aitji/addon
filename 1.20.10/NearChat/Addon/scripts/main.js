@@ -104,7 +104,7 @@ function menu(pl) {
 
         const form = new ModalFormData()
         form.title(`§l§8» §r§7NearChat§8 «`)
-        form.textField(`§c» §cSubscribe §f@InwAitJi\n\n§l§a» §fกำหนดระยะของแชท:\n§7» §iไม่สามารถน้อยกว่า 0 ได้..`, `ex: "13"`, `${chatRang}`)
+        form.textField(`§c» §cSubscribe §f@aitji\n\n§l§a» §fกำหนดระยะของแชท:\n§7» §iไม่สามารถน้อยกว่า 0 ได้..`, `ex: "13"`, `${chatRang}`)
         form.toggle(`§l§fขึ้นข้อความเมื่อไม่ได้รับ§eข้อความ§fไหม§f:`, messageToggle)
         form.toggle(`§l§f"Admin" เห็นทุก§aข้อความ§f:`, AdminToggle)
         form.toggle(`§l§f"Admin" พิมพ์แล้ว§aเห็น§fทุกคน§f:`, TellAdminToggle)

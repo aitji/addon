@@ -8,6 +8,6 @@ system.beforeEvents.watchdogTerminate.subscribe(data => data.cancel = true)
  * @author aitji.
  * @description This Script was created by aitji.
  * @copyright 2023-2024 aitji.
- * @youtube https://www.youtube.com/@aitji./
+ * @youtube https://www.youtube.com/@aitji../
  */
 /** ------------------------------------------- */

@@ -58,7 +58,7 @@ world.afterEvents.chatSend.subscribe((data) => {
 
 function admin_ui(pl) {
     let form = new ActionFormData()
-    form.title(`§l@InwAitJi's Ban System`)
+    form.title(`§l@aitji's Ban System`)
     form.body(`§r  §rต้องการความช่วยเหลือหรือไม่?\nงั้นมาดูสิว่าคุณต้องการอะไร`)
     form.button(`§lช่วยเหลือด้านคำสั่ง\n§r§0กดเพื่อดูรายละเอียด`)
     form.button(`§lรายชื่อผู้โดนแบน\n§r§0กดเพื่อดูรายชื่อ`)
@@ -70,7 +70,7 @@ function admin_ui(pl) {
             switch (res.selection) {
                 case 0:
                     let cmd_form = new ActionFormData()
-                    cmd_form.title(`§l@InwAitJi's Command`)
+                    cmd_form.title(`§l@aitji's Command`)
                     cmd_form.body(`§r  §rนี่คือคำสั่งลัดต่าง ๆ สำหรับแอดออน §lแบน/ปลดแบน§r อักษรขึ้นต้นของแอดออนคือ §l!§r\n\n\n§e!§r[ui/gui/menu/help/?]\n §7เพื่อทำการเปิดหน้าต่างช่วยเหลือต่าง ๆ§r\n\n§e!§rban <ชื่อผู้เล่น>\n §7แบนผู้เล่นที่มีชื่อดังกล่าว§r\n\n§e!§runban§r <ชื่อผู้เล่น>\n §7ปลดแบนผู้เล่นที่มีชื่อดังกล่าว§r\n\n§e!§r[list/view/see]\n §7ดูรายชื่อผู้ที่โดนแบนทั้งหมดในเซิร์ฟเวอร์`)
                     cmd_form.button(`§lย้อนกลับ\n§r§0ย้อนกลับไปหน้าหลัก`)
                     cmd_form.show(pl).then((res) => {
@@ -81,7 +81,7 @@ function admin_ui(pl) {
                     break
                 case 1:
                     let list_form = new ActionFormData()
-                    list_form.title(`§l@InwAitJi's List`)
+                    list_form.title(`§l@aitji's List`)
                     let ban = getBan() || []
                     let des = []
                     ban.forEach((key, i) => {
@@ -104,7 +104,7 @@ function admin_ui(pl) {
                         else if (key.hasTag("Admin")) display.push(`${key.name} §c(แอดมิน)§r`)
                         else display.push(`${key.name}`)
                     })
-                    modalForm.title(`§l@InwAitJi's Ban(Online)`)
+                    modalForm.title(`§l@aitji's Ban(Online)`)
                     modalForm.dropdown(`กรุณาเลือกผู้เล่นที่ต้องการแบน`, display)
                     modalForm.textField(`เหตุผล`, `(ไม่จำเป็นต้องระบุ)`)
                     forceShow(pl, modalForm).then((res1) => {
@@ -137,7 +137,7 @@ function admin_ui(pl) {
                         }
                         if (res1.formValues[0] === 0) {
                             let otherForm = new ModalFormData()
-                            otherForm.title(`§l@InwAitJi's Ban(Other)`)
+                            otherForm.title(`§l@aitji's Ban(Other)`)
                             otherForm.textField(`§rระบุชื่อผู้เล่นที่จะแบน`, `เช่น: ${pl.name}`) // 0
                             otherForm.textField(`§r§7 | §fเหตุผล`, `(ไม่จำเป็นต้องระบุ)`, res1.formValues[1] || ``) // 1
                             forceShow(pl, otherForm).then((res) => {
@@ -169,7 +169,7 @@ function admin_ui(pl) {
                     }
                     let dis = all.map((key) => key.split("|")[1])
                     let form = new ModalFormData()
-                    form.title(`§l@InwAitJi's UnBan`)
+                    form.title(`§l@aitji's UnBan`)
                     form.dropdown(`เลือกผู้เล่นที่ต้องการปลดแบน`, dis)
                     forceShow(pl, form).then((res) => {
                         if (res.canceled) return

@@ -1,6 +1,6 @@
 /** ------------------- */
 import { world, system } from "@minecraft/server";
-/** @ InwAitJi Script @ */
+/** @ aitji Script @ */
 function getScore(objective, target, useZero = true) {
     try {
         const obj = world.scoreboard.getObjective(objective);

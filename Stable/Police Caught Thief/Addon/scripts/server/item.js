@@ -24,7 +24,7 @@ function selectionui(pl) {
     system.run(() => {
         const form = new ActionFormData()
         form.title(`§8Selection Menu`)
-        form.body(`§fSelction to edit a §bOfficer §for §cBandit§f or §eServer\n\n§7@InwAitJi </>§r`)
+        form.body(`§fSelction to edit a §bOfficer §for §cBandit§f or §eServer\n\n§7@aitji </>§r`)
         form.button(`§8Officer\n§7Click Here`)
         form.button(`§8Bandit\n§7Click Here`)
         form.button(`§8Server\n§7Click Here`)
@@ -272,8 +272,8 @@ function servers(pl) {
 }
 
 /**
- * @author InwAitJi
- * @description This Script was created by InwAitJi
- * @copyright 2023-2024 InwAitJi
- * @youtube https://www.youtube.com/@InwAitJi/
+ * @author aitji
+ * @description This Script was created by aitji
+ * @copyright 2023-2024 aitji
+ * @youtube https://www.youtube.com/@aitji./
  */

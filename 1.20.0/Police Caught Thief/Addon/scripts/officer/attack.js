@@ -52,9 +52,9 @@ world.afterEvents.entityHit.subscribe(data => {
 
 /** ------------------------------------------- */
 /**
- * @author InwAitJi
- * @description This Script was created by InwAitJi
- * @copyright 2023-2024 InwAitJi
- * @youtube https://www.youtube.com/@InwAitJi/
+ * @author aitji
+ * @description This Script was created by aitji
+ * @copyright 2023-2024 aitji
+ * @youtube https://www.youtube.com/@aitji./
  */
 /** ------------------------------------------- */

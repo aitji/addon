@@ -2,7 +2,7 @@
 	"format_version": 2,
 	"header": {
 		"name": "§aRank§fChat",
-		"description": "§fYouTube: §c@InwAitJi§r",
+		"description": "§fYouTube: §c@aitji§r",
 		"uuid": "3045de52-01ac-40bb-90c7-885b499bb5d8",
 		"version": [
 			0,
@@ -17,9 +17,9 @@
 	},
 	"metadata": {
 		"authors": [
-			"InwAitJi"
+			"aitji"
 		],
-		"url": "https://www.youtube.com/@InwAitJi"
+		"url": "https://www.youtube.com/@aitji."
 	},
 	"modules": [
 		{

@@ -8,8 +8,8 @@
 		"min_engine_version": [1,19,0]
 	},
 	"metadata": {
-		"authors": ["InwAitJi"],
-		"url": "https://www.youtube.com/@InwAitJi"
+		"authors": ["aitji"],
+		"url": "https://www.youtube.com/@aitji."
 	},
 	"modules": [{
 			"type": "data",
@@ -31,11 +31,7 @@
 	],
 	"dependencies": [{
 			"module_name": "@minecraft/server",
-			"version": "1.9.0"
-		},
-        {
-			"module_name": "@minecraft/server-ui",
-			"version": "1.1.0"
+			"version": "1.18.0"
 		}
 	]
 }

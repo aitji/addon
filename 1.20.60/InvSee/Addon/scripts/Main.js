@@ -3,7 +3,7 @@ system.beforeEvents.watchdogTerminate.subscribe(data => data.cancel = true)
 import "./Display/Chat"
 
 /**
- * @author "InwAitJi"
+ * @author "aitji"
  * @youtube AitJi Gamer
  * @copyright 2022-2023
  * @settings เปิด Beta API ด้วยนะ :>

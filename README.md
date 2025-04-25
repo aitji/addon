@@ -23,7 +23,7 @@ I highly recommend using [my website](https://mcbe.vercel.app/new) to download a
 
 ## Follow me on social media!
 - Github: [aitji](https://github.com/aitji)
-- YouTube: [aitji.](https://www.youtube.com/@aitji.)
+- YouTube: [aitji.](https://www.youtube.com/@aitji..)
 - Discord: aitji
 
 ## How to download the addon

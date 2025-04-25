@@ -1,14 +1,14 @@
 import { system, world, scoreboardIdentity } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui"
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */
 try {
     world.getDimension('overworld').runCommandAsync(`scoreboard objectives add time dummy`)
     world.getDimension('overworld').runCommandAsync(`scoreboard objectives add timesettings dummy`)
-} catch (Subscribe_InwAitJi) {
+} catch (Subscribe_aitji) {
     world.getDimension('overworld').runCommandAsync(`scoreboard objectives add timesettings dummy`)
     world.getDimension('overworld').runCommandAsync(`scoreboard objectives add time dummy`)
 }
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */
 function getScore(objective, target, useZero = true) {
     try {
         const obj = world.scoreboard.getObjective(objective)
@@ -20,7 +20,7 @@ function getScore(objective, target, useZero = true) {
         return useZero ? 0 : NaN
     }
 }
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */
 world.beforeEvents.itemUse.subscribe(data => {
     const pl = data.source
     const item = data.itemStack
@@ -29,14 +29,14 @@ world.beforeEvents.itemUse.subscribe(data => {
         timeSetting(pl)
     }
 })
-/** --------------[ UwU - InwAitJi ]-------------- */
-system.runInterval(InwAitJi => {
+/** --------------[ UwU - aitji ]-------------- */
+system.runInterval(aitji => {
     let years
     let gmts = 7
     try {
         years = getScore('timesettings', 'year', true)
         gmts = getScore('timesettings', 'gmt', true)
-    } catch (Like_InwAitJi_VideoNow) { }
+    } catch (Like_aitji_VideoNow) { }
     let addyear
     if (years === 0) addyear = 0; else addyear = 543;
 
@@ -57,7 +57,7 @@ system.runInterval(InwAitJi => {
     world.getDimension('overworld').runCommandAsync(`scoreboard players set month time ${month}`)
     world.getDimension('overworld').runCommandAsync(`scoreboard players set year time ${year}`)
 })
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */
 function timeSetting(pl) {
     system.run(() => {
         let years
@@ -65,7 +65,7 @@ function timeSetting(pl) {
         try {
             years = getScore('timesettings', 'year', true)
             gmts = getScore('timesettings', 'gmt', true)
-        } catch (Like_InwAitJi_VideoNow) { }
+        } catch (Like_aitji_VideoNow) { }
         if (gmts === 0) {
             gmts = ""
         }
@@ -94,4 +94,4 @@ function timeSetting(pl) {
         })
     })
 }
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */

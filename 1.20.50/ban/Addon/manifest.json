@@ -1,7 +1,7 @@
 {
     "format_version": 2,
     "header": {
-        "name": "§c@InwAitJi §fBan Addon",
+        "name": "§c@aitji §fBan Addon",
         "description": "",
         "uuid": "7ca34988-734f-4f9f-bd9a-ea5f5dddc500",
         "version": [
@@ -17,9 +17,9 @@
     },
     "metadata": {
         "authors": [
-            "InwAitJi"
+            "aitji"
         ],
-        "url": "https://www.youtube.com/@InwAitJi"
+        "url": "https://www.youtube.com/@aitji."
     },
     "modules": [
         {

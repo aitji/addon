@@ -2,16 +2,16 @@
 	"format_version": 2,
 	"header": {
 		"name": "§cNear§fChat",
-		"description": "§fYouTube: §c@InwAitJi\n§aVersion: 1.20.10",
+		"description": "§fYouTube: §c@aitji\n§aVersion: 1.20.10",
 		"uuid": "118b2a77-6107-453d-85b0-b738d9ea2cdd",
 		"version": [1,20,10],
 		"min_engine_version": [1,20,10]
 	},
 	"metadata": {
 		"authors": [
-			"InwAitJi"
+			"aitji"
 		],
-		"url": "https://www.youtube.com/@InwAitJi"
+		"url": "https://www.youtube.com/@aitji."
 	},
 	"modules": [
 		{

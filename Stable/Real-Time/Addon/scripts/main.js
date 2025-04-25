@@ -1,14 +1,14 @@
 import { system, world } from "@minecraft/server"
 import { ModalFormData } from "@minecraft/server-ui"
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */
 try {
     world.getDimension('overworld').runCommandAsync(`scoreboard objectives add time dummy`)
     world.getDimension('overworld').runCommandAsync(`scoreboard objectives add timesettings dummy`)
-} catch (Subscribe_InwAitJi) {
+} catch (Subscribe_aitji) {
     world.getDimension('overworld').runCommandAsync(`scoreboard objectives add timesettings dummy`)
     world.getDimension('overworld').runCommandAsync(`scoreboard objectives add time dummy`)
 }
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */
 function getScore(objective, target, useZero = true) {
     try {
         const obj = world.scoreboard.getObjective(objective)
@@ -20,11 +20,11 @@ function getScore(objective, target, useZero = true) {
         return useZero ? 0 : NaN
     }
 }
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */
 function set(name, value) {
     world.getDimension('overworld').runCommandAsync(`scoreboard players set "${name}" time ${value}`)
 }
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */
 system.runInterval(() => {
     let GMT = 7
     try { GMT = getScore('timesettings', 'gmt', true) }
@@ -39,12 +39,12 @@ system.runInterval(() => {
     set('month', date.getMonth())
     set('year', date.getFullYear() + (GMT === 0 ? 543 : 0))
 }, 20);
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */
 world.beforeEvents.itemUse.subscribe(data => {
     const { source: pl, itemStack: item } = data
     if (item.typeId === "minecraft:clock" && pl.hasTag("Admin")) timeSetting(pl)
 })
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */
 function timeSetting(player) {
     system.run(() => {
         const form = new ModalFormData()
@@ -69,4 +69,4 @@ function timeSetting(player) {
         })
     })
 }
-/** --------------[ UwU - InwAitJi ]-------------- */
+/** --------------[ UwU - aitji ]-------------- */

@@ -65,7 +65,7 @@ function rsetting(pl) {
         if (chatdef === "" || chatdef === undefined) chatdef = def
         const form = new ModalFormData()
         form.title(`§l§8» §r§7RankChat §l§8«`)
-        form.textField(`§c§l»§r§c Subscribe §f@InwAitJi§r\n\n§l§a»§r§f Rank Chat §aPrefix§f ex: §o"rank:"§r\n§l§a»§r§l §aคำนำหน้า§fก่อน Rank เช่น §o"rank:"§r`, `ex: "${chatprefix ?? `rank:`}"`, chatprefix)
+        form.textField(`§c§l»§r§c Subscribe §f@aitji§r\n\n§l§a»§r§f Rank Chat §aPrefix§f ex: §o"rank:"§r\n§l§a»§r§l §aคำนำหน้า§fก่อน Rank เช่น §o"rank:"§r`, `ex: "${chatprefix ?? `rank:`}"`, chatprefix)
         form.textField(`§l§e»§r§f Rank Chat §eDefault§f ex: §o"§7Player§f"§r\n§l§e»§r§l §fยศ§eเริ่มต้น §fเช่น §o"§7ผู้เล่น§f"§r`, `ex: "${chatdef ?? `§7player`}"`, chatdef)
         form.show(pl).then(res => {
             if (res.canceled) return
