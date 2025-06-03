@@ -2,10 +2,13 @@
 
 Welcome to the addon! This addon (script) was created by me! to give a cool viwer on my channel!
 
-I highly recommend using [my website](https://mcbe.vercel.app/new) to download addon!
+I highly recommend using [my website](https://aitji.is-a.dev) to download addon!
 
 <hr>
- 
+
+![aitji addon size](https://img.shields.io/github/repo-size/aitji/addon?style=for-the-badge&label=Size&color=red)
+![aitji addon commit activity](https://img.shields.io/github/commit-activity/y/aitji/addon?style=for-the-badge&label=Commits&color=yellow)
+
 > [!TIP]
 >  What you can do with this addon
 > - Learn Javascript and see how it can be used in Minecraft
