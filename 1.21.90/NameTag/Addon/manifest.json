@@ -1,0 +1,52 @@
+{
+    "format_version": 2,
+    "header": {
+        "name": "§f[=--- §bCustom §fName / NameTag §f---=]§r",
+        "description": "§fThis §baddon§f Mad by §bAitJi Gamer\n§aVersion: 1.21.70",
+        "uuid": "bd980f56-6f73-459d-8b7e-b892e8bb92be",
+        "version": [1,21,70],
+        "min_engine_version": [
+            1,
+            19,
+            0
+        ]
+    },
+    "metadata": {
+        "authors": [
+            "aitji."
+        ],
+        "url": "https://www.youtube.com/@aitji.."
+    },
+    "modules": [
+        {
+            "type": "data",
+            "uuid": "d9abd52c-1827-4823-8f5a-7bba3ccfa89c",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        },
+        {
+            "description": "§fThis §baddon§f Mad by §bAitJi Gamer§r",
+            "language": "javascript",
+            "type": "script",
+            "uuid": "6844f4e4-2dd4-4979-a7b2-7c62abd01351",
+            "version": [
+                0,
+                0,
+                1
+            ],
+            "entry": "scripts/index.js"
+        }
+    ],
+	"dependencies": [{
+        "module_name": "@minecraft/server",
+        "version": "2.0.0-beta"
+    },
+    {
+        "module_name": "@minecraft/server-ui",
+        "version": "2.0.0-beta"
+    }
+]
+}

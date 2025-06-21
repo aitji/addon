@@ -1,0 +1,41 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "§faitji.'s §cScripting [UnBreak]",
+		"description": "§fFully Write by §c@aitji.\nVersion: 1.21.70§r",
+		"uuid": "92196fcd-65cc-40f2-a282-e2ba0e359c5c",
+		"version": [1,21,70],
+		"min_engine_version": [1, 20, 80]
+	},
+	"metadata": {
+		"authors": ["aitji."],
+		"url": "https://www.youtube.com/@aitji.."
+	},
+	"modules": [{
+			"type": "data",
+			"uuid": "c7a53b4a-4104-4312-87c9-0fd815987393",
+			"version": [
+				1,
+				0,
+				0
+			]
+		},
+		{
+			"description": "§fFully Write by §c@aitji.§r",
+			"language": "javascript",
+			"type": "script",
+			"uuid": "d7da681a-5c2c-4951-bcf5-e1951fc267f1",
+			"version": [0, 0, 1],
+			"entry": "scripts/main.js"
+		}
+	],
+	"dependencies": [{
+			"module_name": "@minecraft/server",
+			"version": "2.0.0-beta"
+		},
+        {
+			"module_name": "@minecraft/server-ui",
+			"version": "2.0.0-beta"
+		}
+	]
+}
