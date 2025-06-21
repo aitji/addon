@@ -2,9 +2,9 @@
     "format_version": 2,
     "header": {
         "name": "§f[=--- §bCustom §fName / NameTag §f---=]§r",
-        "description": "§fThis §baddon§f Mad by §bAitJi Gamer\n§aVersion: 1.21.70",
+        "description": "§fThis §baddon§f Mad by §bAitJi Gamer\n§aVersion: 1.21.90",
         "uuid": "bd980f56-6f73-459d-8b7e-b892e8bb92be",
-        "version": [1,21,70],
+        "version": [1,21,90],
         "min_engine_version": [
             1,
             19,
@@ -42,11 +42,11 @@
     ],
 	"dependencies": [{
         "module_name": "@minecraft/server",
-        "version": "2.0.0-beta"
+        "version": "2.1.0-beta"
     },
     {
         "module_name": "@minecraft/server-ui",
-        "version": "2.0.0-beta"
+        "version": "2.1.0-beta"
     }
 ]
 }

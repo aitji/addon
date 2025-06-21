@@ -2,9 +2,9 @@
 	"format_version": 2,
 	"header": {
 		"name": "§fROOM §cCHAT §fAddon",
-		"description": "§fเขียนโดย §cAitJi Gamer\n§aVersion: 1.21.70",
+		"description": "§fเขียนโดย §cAitJi Gamer\n§aVersion: 1.21.90",
 		"uuid": "033f542e-20f7-4805-8eac-183468629ae2",
-		"version": [1,21,70],
+		"version": [1,21,90],
 		"min_engine_version": [1, 20, 0]
 	},
 	"metadata": {
@@ -31,11 +31,11 @@
 	],
 	"dependencies": [{
 			"module_name": "@minecraft/server",
-			"version": "2.0.0-beta"
+			"version": "2.1.0-beta"
 		},
         {
 			"module_name": "@minecraft/server-ui",
-			"version": "2.0.0-beta"
+			"version": "2.1.0-beta"
 		}
 	]
 }

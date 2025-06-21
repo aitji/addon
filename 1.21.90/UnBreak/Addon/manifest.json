@@ -2,9 +2,9 @@
 	"format_version": 2,
 	"header": {
 		"name": "§faitji.'s §cScripting [UnBreak]",
-		"description": "§fFully Write by §c@aitji.\nVersion: 1.21.70§r",
+		"description": "§fFully Write by §c@aitji.\nVersion: 1.21.90§r",
 		"uuid": "92196fcd-65cc-40f2-a282-e2ba0e359c5c",
-		"version": [1,21,70],
+		"version": [1,21,90],
 		"min_engine_version": [1, 20, 80]
 	},
 	"metadata": {
@@ -31,11 +31,11 @@
 	],
 	"dependencies": [{
 			"module_name": "@minecraft/server",
-			"version": "2.0.0-beta"
+			"version": "2.1.0-beta"
 		},
         {
 			"module_name": "@minecraft/server-ui",
-			"version": "2.0.0-beta"
+			"version": "2.1.0-beta"
 		}
 	]
 }

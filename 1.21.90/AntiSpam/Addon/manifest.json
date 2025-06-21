@@ -2,9 +2,9 @@
 	"format_version": 2,
 	"header": {
 		"name": "§fAnti §cSpam§r",
-		"description": "§fScript by §eAitJi Gamer§r\n1.21.70",
+		"description": "§fScript by §eAitJi Gamer§r\n1.21.90",
 		"uuid": "b5539a25-3848-417f-b5d3-c54675265edd",
-		"version": [1,21,70],
+		"version": [1,21,90],
 		"min_engine_version": [1, 19, 0]
 	},
 	"metadata": {
@@ -31,11 +31,11 @@
 	],
 	"dependencies": [{
 		"module_name": "@minecraft/server",
-		"version": "2.0.0-beta"
+		"version": "2.1.0-beta"
 	},
 	{
 		"module_name": "@minecraft/server-ui",
-		"version": "2.0.0-beta"
+		"version": "2.1.0-beta"
 	}
 ]
 }

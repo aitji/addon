@@ -2,9 +2,9 @@
     "format_version": 2,
     "header": {
 		"name": "§l§9Inv See §fAddon§r",
-		"description": "§fDon't Forgot to Thank aitji.\n§aVersion: 1.21.70",
+		"description": "§fDon't Forgot to Thank aitji.\n§aVersion: 1.21.90",
         "uuid": "1ac76a5f-ec34-477d-8b0d-293534e3a35e",
-        "version": [1,21,70],
+        "version": [1,21,90],
         "min_engine_version": [
             1,
             19,
@@ -26,11 +26,11 @@
     ],
 	"dependencies": [{
         "module_name": "@minecraft/server",
-        "version": "2.0.0-beta"
+        "version": "2.1.0-beta"
     },
     {
         "module_name": "@minecraft/server-ui",
-        "version": "2.0.0-beta"
+        "version": "2.1.0-beta"
     }
 ]
 }

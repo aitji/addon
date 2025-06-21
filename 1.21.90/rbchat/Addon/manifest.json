@@ -2,9 +2,9 @@
 	"format_version": 2,
 	"header": {
 		"name": "§6Roblox §fChat",
-		"description": "§fYouTube: §c@aitji.\n§aVersion: 1.21.70",
+		"description": "§fYouTube: §c@aitji.\n§aVersion: 1.21.90",
 		"uuid": "45226bea-80c6-4140-b65c-f4cafbdf809b",
-		"version": [1,21,70],
+		"version": [1,21,90],
 		"min_engine_version": [
 			1,
 			20,
@@ -43,11 +43,11 @@
 	"dependencies": [
 		{
 			"module_name": "@minecraft/server",
-			"version": "2.0.0-beta"
+			"version": "2.1.0-beta"
 		},
 		{
 			"module_name": "@minecraft/server-ui",
-			"version": "2.0.0-beta"
+			"version": "2.1.0-beta"
 		}
 	]
 }

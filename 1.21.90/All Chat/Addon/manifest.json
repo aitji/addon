@@ -2,9 +2,9 @@
 	"format_version": 2,
 	"header": {
 		"name": "§bAll §fChat",
-		"description": "§cYouTube: §fAitJi Gamer\nScript Version: §a1.21.70§r",
+		"description": "§cYouTube: §fAitJi Gamer\nScript Version: §a1.21.90§r",
 		"uuid": "24e1ded1-5a1c-49a2-a201-da985c71858e",
-		"version": [1,21,70],
+		"version": [1,21,90],
 		"min_engine_version": [1, 19, 0]
 	},
 	"metadata": {
@@ -21,7 +21,7 @@
 			]
 		},
 		{
-			"description": "§cYouTube: §fAitJi Gamer\nScript Version: §a1.21.70§r",
+			"description": "§cYouTube: §fAitJi Gamer\nScript Version: §a1.21.90§r",
 			"language": "javascript",
 			"type": "script",
 			"uuid": "d7da681a-5c2c-4951-bcf5-e1951fc267f1",
@@ -31,11 +31,11 @@
 	],
 	"dependencies": [{
 			"module_name": "@minecraft/server",
-			"version": "2.0.0-beta"
+			"version": "2.1.0-beta"
 		},
         {
 			"module_name": "@minecraft/server-ui",
-			"version": "2.0.0-beta"
+			"version": "2.1.0-beta"
 		}
 	]
 }
