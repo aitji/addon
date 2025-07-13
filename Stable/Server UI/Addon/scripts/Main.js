@@ -3,7 +3,7 @@ import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 
 let moneyObj = "money"
 let bankObj = "bank"
-let moveStep = 10
+let moveStep = 1
 
 function getScore(objective, target, useZero = true) {
 	try {
@@ -32,7 +32,7 @@ function getText(player, get) {
 
 		if (get === "bankBody") go = `§fWelcome §c${pl.name}§f to §eBANK §fMenu What do you want to do?`
 		if (get === "withdraw") go = `§8Withdraw Money`
-		if (get === "deposit") go = `§8Withdraw Money`
+		if (get === "deposit") go = `§8Deposit Money`
 
 		if (get === "withdrawMsgFail") go = `§7> §fSorry You didn't have §cmoney§f in Bank §7<`
 		if (get === "withdrawBody") go = `§fHi §c${pl.name}§f Slider You §aMoney§f in bank back to you §6Pocket §fScrolling`
@@ -45,7 +45,7 @@ function getText(player, get) {
 		if (get === "detailsBody") go = `Player Online: ${players.length} \nAll §cPlayer§f In This Server..`
 	} else if (player.hasTag("th")) {
 		if (get === "title") go = `§e» §fเมนูของ §c${player.name}'s  §e«§r`
-		if (get === "welcomeBody") go = `§fสวัสดี! §c${player.name}§f, ยินดีต้อนรับสู่ เมนูของ เซิปเวอร์นี้\n§fมา§cดู§f กันดีกว่าว่า§cคุณ§fจะทำอะไร!§r`
+		if (get === "welcomeBody") go = `§fสวัสดี! §c${player.name}§f, ยินดีต้อนรับสู่ เมนูของ เซิร์ฟเวอร์นี้\n§fมา§cดู§f กันดีกว่าว่า§cคุณ§fจะทำอะไร!§r`
 		if (get === "b1") go = `§8ล็อบบี้`
 		if (get === "b2") go = `§8ธนาคาร`
 		if (get === "b3") go = `§8รายละเอียดผู้เล่น`
@@ -62,7 +62,7 @@ function getText(player, get) {
 		if (get === "depositBody") go = `§fสวัสดี ${pl.name} §fเลื่อนเพื่อฝากเงินเข้า §eธนาคาร §fกำลังเลื่อนอยู่ที่ `
 		if (get === "depositDone") go = `§7> §fคุณได้ทำการ §cฝากเงิน §fจำนวน `
 
-		if (get === "detailsBody") go = `§fผู้เล่นออนไลน์ ทั้งหมด:§a ${players.length} \n§fรายชื่อผู้เล่นที่อยู่ในเซิปเวอร์ทั้งหมด..`
+		if (get === "detailsBody") go = `§fผู้เล่นออนไลน์ ทั้งหมด:§a ${players.length} \n§fรายชื่อผู้เล่นที่อยู่ในเซิร์ฟเวอร์ทั้งหมด..`
 	} else {
 		return `§4player tag wasn't found\nerror contact: §cDiscord.gg/z4Mu55phPw`
 	}
