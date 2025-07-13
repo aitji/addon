@@ -1,18 +1,18 @@
 import { ScoreboardIdentityType, world, system, Player } from "@minecraft/server"
 import { ModalFormData } from '@minecraft/server-ui'
-import { CalDistance, color, getFakePlayer, getScore } from "./call/function"
+import { CalDistance, color, getFakePlayer, getScore, toBool } from "./call/function"
 system.beforeEvents.watchdogTerminate.subscribe(d => d.cancel = true)
 /** _______________________________________________________________ */
 const RankPrefix = "rank:"
 const def = "§7Player"
 /** _______________________________________________________________ */
 const safeGet = (arr, key, def) => {
-    try { return arr.filter(x => x.startsWith(key)).join('').split("⌁")[1] ?? def }
+    try { return arr.filter(x => x.startsWith(key)).join('').split("⌁")[1] || def }
     catch { return def }
 }
 /** _______________________________________________________________ */
 function send_style(pl, msg) {
-    const chatroom = getScore('chatroom', pl, true) ?? 0
+    const chatroom = getScore('chatroom', pl, true) || 0
     const setting = getFakePlayer('rankchat')
     const setting2 = getFakePlayer('chatroomSetting')
     const chatprefix = safeGet(setting, 'chatprefix⌁', RankPrefix)
@@ -33,7 +33,7 @@ function send_style(pl, msg) {
     pl.sendMessage(msgFormatted)
 
     let players = world.getAllPlayers().filter(p => p.name !== pl.name)
-    let radius = getScore("chatDistance", "chatRang", true) ?? 15
+    let radius = getScore("chatDistance", "chatRang", true) || 15
     const toggles = {
         msg: toBool(getScore("chatDistance", "messageToggle", true)),
         admin: toBool(getScore("chatDistance", "AdminToggle", true)),
@@ -41,7 +41,7 @@ function send_style(pl, msg) {
     }
 
     for (let p of players) {
-        const sameRoom = getScore('chatroom', p, true) ?? 0
+        const sameRoom = getScore('chatroom', p, true) || 0
 
         if (p.hasTag("Admin") && toggles.admin) {
             p.sendMessage(msgFormatted)
@@ -76,10 +76,10 @@ world.beforeEvents.chatSend.subscribe(e => {
     const msg = e.message
     e.cancel = true
 
-    const delay = getScore('delay', pl, true) ?? 0
+    const delay = getScore('delay', pl, true) || 0
     const setting = getFakePlayer('chatsettings')
-    const text = setting.find(x => x.startsWith('text:'))?.split(":")[1] ?? ''
-    const cps = getScore('chatsettings', 'cps', true) ?? 0
+    const text = setting.find(x => x.startsWith('text:'))?.split(":")[1] || ''
+    const cps = getScore('chatsettings', 'cps', true) || 0
 
     if (delay > 0) {
         pl.sendMessage(`${text} §7: §c${delay}`)
@@ -87,7 +87,9 @@ world.beforeEvents.chatSend.subscribe(e => {
     }
 
     const delayr = world.scoreboard.getObjective('delay')
-    delayr.setScore(pl, Number(cps))
+    system.run(() => {
+        delayr.setScore(pl, Number(cps))
+    })
     send_style(pl, msg)
 })
 /** _______________________________________________________________ */

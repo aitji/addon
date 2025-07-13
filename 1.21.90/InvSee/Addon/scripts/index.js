@@ -16,5 +16,8 @@ export function commandHandler(player, message) {
     const args = message.message.slice(prefix.length).split(/ +/)
     const cmd = args.shift().toLowerCase().trim()
 
-    if (cmd === "invsee") invsee(message, args)
+    if (cmd === "invsee") {
+        message.cancel = true
+        invsee(message, args)
+    }
 }

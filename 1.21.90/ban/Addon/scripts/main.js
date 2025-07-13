@@ -1,4 +1,4 @@
-import { ScoreboardIdentityType, system, world, } from "@minecraft/server"
+import { CommandPermissionLevel, CustomCommandParamType, ScoreboardIdentityType, system, world, } from "@minecraft/server"
 import { ModalFormData, ActionFormData, FormCancelationReason, ModalFormResponse, ActionFormResponse, } from "@minecraft/server-ui"
 
 system.beforeEvents.watchdogTerminate.subscribe((data) => (data.cancel = true))

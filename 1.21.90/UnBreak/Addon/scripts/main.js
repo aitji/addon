@@ -11,9 +11,9 @@ function getScore(objective, target, useZero = true) {
     try {
         const obj = world.scoreboard.getObjective(objective)
         if (typeof target == 'string') {
-            return obj.getScore(obj.getParticipants().find(v => v.displayName == target)) ?? 0
+            return obj.getScore(obj.getParticipants().find(v => v.displayName == target)) || 0
         }
-        return obj.getScore(target.scoreboardIdentity) ?? 0
+        return obj.getScore(target.scoreboardIdentity) || 0
     } catch {
         return useZero ? 0 : NaN
     }
@@ -45,30 +45,21 @@ function boolTo(data) {
  */
 function createScore(scoreboardName) {
     if (world.scoreboard.getObjective(scoreboardName)) return
-    world.scoreboard.addObjective(scoreboardName, scoreboardName)
-    world.getDimension("overworld").runCommand(`scoreboard players reset * unbreak`)
-    world.getDimension("overworld").runCommand(`scoreboard players set "tag⌁build" unbreak 2`)
-    world.getDimension("overworld").runCommand(`scoreboard players set "breaktext⌁§c[!] ห้ามทุบบล็อก!§r" unbreak 2`)
-    world.getDimension("overworld").runCommand(`scoreboard players set "placetext⌁§c[!] ห้ามวางบล็อก!§r" unbreak 2`)
-    world.getDimension("overworld").runCommand(`scoreboard players set "parbreak" unbreak 1`)
-    world.getDimension("overworld").runCommand(`scoreboard players set "parplace" unbreak 1`)
-    world.getDimension("overworld").runCommand(`scoreboard players set "popbreak" unbreak 1`)
-    world.getDimension("overworld").runCommand(`scoreboard players set "popplace" unbreak 1`)
-    world.getDimension("overworld").runCommand(`scoreboard players set "dashbreak" unbreak 1`)
-    world.getDimension("overworld").runCommand(`playsound random.orb @s`)
-}
-/** ________________________________________________ */
-/**
- * @param {Player} target 
- * @param {number} horizontalStrength 
- * @param {number} verticalStrength 
- * @param {Player} pro 
- */
-function applyDash(target, horizontalStrength, verticalStrength, pro) {
-    const di = pro.getViewDirection()
-    const hStrength = Math.sqrt(di.x ** 2 + di.z ** 2) * horizontalStrength
-    const vStrength = di.y * verticalStrength
-    target.applyKnockback(di.x, di.z, hStrength, vStrength)
+
+    const objective = world.scoreboard.addObjective(scoreboardName, scoreboardName)
+    objective.getParticipants().forEach(p => objective.removeParticipant(p))
+
+    const fakr = [
+        ['tag⌁build', 2],
+        ['breaktext⌁§c[!] ห้ามทุบบล็อก!§r', 2],
+        ['placetext⌁§c[!] ห้ามวางบล็อก!§r', 2],
+        ['parbreak', 1],
+        ['parplace', 1],
+        ['popbreak', 1],
+        ['popplace', 1]
+    ]
+
+    fakr.forEach(([name, score]) => objective.setScore(name, score))
 }
 /** ________________________________________________ */
 /**
@@ -87,27 +78,30 @@ system.run(() => createScore("unbreak"))
 /** ________________________________________________ */
 world.beforeEvents.playerBreakBlock.subscribe((data) => {
     const pl = data.player
-    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace, dashbreak] = get();
-    if (pl.hasTag(tag ?? "build")) return
+    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace] = get();
+    if (pl.hasTag(tag || "build")) return
     data.cancel = true
 
-    if (breaktext.trim() !== "") pl.sendMessage(breaktext ?? `§c[!] Hey Don't Break this block!`)
-    if (parbreak) pl.runCommand(`particle minecraft:villager_angry ${data.block.x} ${data.block.y + 1.5} ${data.block.z}`)
-    if (parbreak) pl.runCommand(`particle minecraft:egg_destroy_emitter ${data.block.x} ${data.block.y + 1} ${data.block.z}`)
-    if (popbreak) pl.runCommand(`playsound random.pop @a[r=5]`)
-    if (dashbreak) system.run(() => applyDash(pl, 0, -0.2, pl))
+    if (breaktext.trim() !== "") pl.sendMessage(breaktext || `§c[!] Hey Don't Break this block!`)
+    system.run(() => {
+        if (parbreak) pl.spawnParticle('minecraft:villager_angry', { x: data.block.x + .5, y: data.block.y + 1.5, z: data.block.z + .5 })
+        if (parbreak) pl.spawnParticle('minecraft:egg_destroy_emitter', { x: data.block.x + .5, y: data.block.y + 1, z: data.block.z + .5 })
+        if (popbreak) pl.runCommand(`playsound random.pop @a[r=5]`)
+    })
 })
 /** ________________________________________________ */
 world.beforeEvents.playerPlaceBlock.subscribe(data => {
     const pl = data.player
-    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace, dashbreak] = get();
-    if (pl.hasTag(tag ?? "build")) return
+    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace] = get();
+    if (pl.hasTag(tag || "build")) return
     data.cancel = true
 
-    if (placetext.trim() !== "") pl.sendMessage(placetext ?? `§c[!] Hey Don't Place that block!`)
-    if (parplace) pl.runCommand(`particle minecraft:villager_angry ${data.block.x} ${data.block.y + 1.5} ${data.block.z}`)
-    if (parplace) pl.runCommand(`particle minecraft:egg_destroy_emitter ${data.block.x} ${data.block.y + 1} ${data.block.z}`)
-    if (popplace) pl.runCommand(`playsound random.pop @a[r=5]`)
+    if (placetext.trim() !== "") pl.sendMessage(placetext || `§c[!] Hey Don't Place that block!`)
+    system.run(() => {
+        if (parbreak) pl.spawnParticle('minecraft:villager_angry', { x: data.block.x + .5, y: data.block.y + 1.5, z: data.block.z + .5 })
+        if (parbreak) pl.spawnParticle('minecraft:egg_destroy_emitter', { x: data.block.x + .5, y: data.block.y + 1, z: data.block.z + .5 })
+        if (popbreak) pl.runCommand(`playsound random.pop @a[r=5]`)
+    })
 })
 /** ________________________________________________ */
 world.beforeEvents.itemUse.subscribe((data) => {
@@ -121,32 +115,33 @@ world.beforeEvents.itemUse.subscribe((data) => {
  */
 function settings(pl) {
     const form = new ModalFormData()
-    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace, dashbreak] = get();
+    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace] = get();
 
     form.title(`§9Unbreak§r Settings`)
-    form.textField(`§fแท็กสำหรับ §eคนสร้าง:\n§f(ค่าเริ่มต้น: §7build§f)`, `เขียนแท็กที่นี่~`, tag)
-    form.textField(`§fข้อความเตือน [§cตอน ทุบบล็อก§f]\n§fการเว้นว่างจะทำให้ไม่แสดงข้อความ`, `เขียนข้อความ ๆ`, breaktext)
-    form.textField(`§fข้อความเตือน [§aตอน วางบล็อก§f]\n§fการเว้นว่างจะทำให้ไม่แสดงข้อความ`, `เขียนข้อความ ๆ`, placetext)
+    form.textField(`§fแท็กสำหรับ §eคนสร้าง:\n§f(ค่าเริ่มต้น: §7build§f)`, `เขียนแท็กที่นี่~`, { defaultValue: tag })
+    form.textField(`§fข้อความเตือน [§cตอน ทุบบล็อก§f]\n§fการเว้นว่างจะทำให้ไม่แสดงข้อความ`, `เขียนข้อความ ๆ`, { defaultValue: breaktext })
+    form.textField(`§fข้อความเตือน [§aตอน วางบล็อก§f]\n§fการเว้นว่างจะทำให้ไม่แสดงข้อความ`, `เขียนข้อความ ๆ`, { defaultValue: placetext })
 
-    form.toggle(`§fพาร์ทิเคิล~ [§cตอน ทุบบล็อก§f]`, parbreak)
-    form.toggle(`§fพาร์ทิเคิล~ [§aตอน วางบล็อก§f]`, parplace)
+    form.toggle(`§fพาร์ทิเคิล~ [§cตอน ทุบบล็อก§f]`, { defaultValue: parbreak })
+    form.toggle(`§fพาร์ทิเคิล~ [§aตอน วางบล็อก§f]`, { defaultValue: parplace })
 
-    form.toggle(`§fเสียง §ePOP§f [§cตอน ทุบบล็อก§f]`, popbreak)
-    form.toggle(`§fเสียง §ePOP§f~ [§aตอน วางบล็อก§f]`, popplace)
-    form.toggle(`§fเด้ง§eผู้เล่น§fขึ้นเล็กน้อย§f~ [§cตอน ทุบบล็อก§f]`, dashbreak)
+    form.toggle(`§fเสียง §ePOP§f [§cตอน ทุบบล็อก§f]`, { defaultValue: popbreak })
+    form.toggle(`§fเสียง §ePOP§f~ [§aตอน วางบล็อก§f]`, { defaultValue: popplace })
     form.show(pl).then((res) => {
         if (res.canceled) return
         const resu = res.formValues
-        pl.runCommand(`scoreboard players reset * unbreak`)
-        pl.runCommand(`scoreboard players set "tag⌁${resu[0]}" unbreak 2`)
-        pl.runCommand(`scoreboard players set "breaktext⌁${resu[1]}" unbreak 2`)
-        pl.runCommand(`scoreboard players set "placetext⌁${resu[2]}" unbreak 2`)
-        pl.runCommand(`scoreboard players set "parbreak" unbreak ${boolTo(resu[3])}`)
-        pl.runCommand(`scoreboard players set "parplace" unbreak ${boolTo(resu[4])}`)
-        pl.runCommand(`scoreboard players set "popbreak" unbreak ${boolTo(resu[5])}`)
-        pl.runCommand(`scoreboard players set "popplace" unbreak ${boolTo(resu[6])}`)
-        pl.runCommand(`scoreboard players set "dashbreak" unbreak ${boolTo(resu[7])}`)
-        pl.runCommand(`playsound random.orb @s`)
+        const unbreak_ = world.scoreboard.getObjective('unbreak')
+        unbreak_.getParticipants().forEach(e => unbreak_.removeParticipant(e))
+
+        unbreak_.setScore(`tag⌁${resu[0]}`, 2)
+        unbreak_.setScore(`breaktext⌁${resu[1]}`, 2)
+        unbreak_.setScore(`placetext⌁${resu[2]}`, 2)
+        unbreak_.setScore("parbreak", boolTo(resu[3]))
+        unbreak_.setScore("parplace", boolTo(resu[4]))
+        unbreak_.setScore("popbreak", boolTo(resu[5]))
+        unbreak_.setScore("popplace", boolTo(resu[6]))
+
+        pl.playSound('random.orb')
         pl.sendMessage(`§l§aบันทึก§r§fข้อมูลแล้ว~`)
     })
 }
@@ -155,7 +150,7 @@ function settings(pl) {
  * @returns {Array}
  */
 function get() {
-    let tag, breaktext, placetext, parbreak, parplace, popbreak, popplace, dashbreak;
+    let tag, breaktext, placetext, parbreak, parplace, popbreak, popplace
     try {
         let setting = getFakePlayer('unbreak');
         tag = setting.find(str => str.startsWith('tag⌁'))?.split("⌁")[1] || "build";
@@ -166,11 +161,10 @@ function get() {
         parplace = toBool(getScore("unbreak", "parplace", true))
         popbreak = toBool(getScore("unbreak", "popbreak", true))
         popplace = toBool(getScore("unbreak", "popplace", true))
-        dashbreak = toBool(getScore("unbreak", "dashbreak", true))
         if (breaktext.trim() === "") breaktext = "";
         if (placetext.trim() === "") placetext = "";
     } catch (UwU) { }
 
-    return [tag, breaktext ?? "§c[!] ห้ามทุบบล็อก!§r", placetext ?? "§c[!] ห้ามวางบล็อก!§r", parbreak, parplace, popbreak, popplace, dashbreak];
+    return [tag, breaktext || "§c[!] ห้ามทุบบล็อก!§r", placetext || "§c[!] ห้ามวางบล็อก!§r", parbreak, parplace, popbreak, popplace];
 }
 /** ________________________________________________ */

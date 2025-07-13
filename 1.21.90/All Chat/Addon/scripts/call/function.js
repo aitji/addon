@@ -10,9 +10,9 @@ export function getScore(objective, target, useZero = true) {
     try {
         const obj = world.scoreboard.getObjective(objective)
         if (typeof target == 'string') {
-            return obj.getScore(obj.getParticipants().find(v => v.displayName == target)) ?? 0
+            return obj.getScore(obj.getParticipants().find(v => v.displayName == target)) || 0
         }
-        return obj.getScore(target.scoreboardIdentity) ?? 0
+        return obj.getScore(target.scoreboardIdentity) || 0
     } catch {
         return useZero ? 0 : NaN
     }

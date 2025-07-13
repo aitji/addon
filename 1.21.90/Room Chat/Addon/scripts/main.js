@@ -35,40 +35,41 @@ function boolTo(data) {
 world.beforeEvents.itemUse.subscribe((data) => {
     const pl = data.source
     const item = data.itemStack
-    if (item?.typeId === "minecraft:paper" && pl.hasTag("Admin")) {
-        system.run(() => {
-            let kingTag, allSeeAdmin, adminSeeAll
-            try {
-                let setting = getFakePlayer('chatroomSetting')
-                kingTag = setting.filter(str => str.startsWith('kingTag⌁')).join('').split("⌁")[1]
-                allSeeAdmin = toBool(getScore("chatroomSetting", "allSeeAdmin", true))
-                adminSeeAll = toBool(getScore("chatroomSetting", "adminSeeAll", true))
-            } catch (UwU) { }
-            if (kingTag === "" || kingTag === undefined) kingTag = "king"
-            if (allSeeAdmin === "" || allSeeAdmin === undefined) allSeeAdmin = false
-            if (adminSeeAll === "" || adminSeeAll === undefined) adminSeeAll = false
+    if (item?.typeId === "minecraft:paper" && pl.hasTag("Admin")) system.run(() => {
+        let kingTag, allSeeAdmin, adminSeeAll
+        try {
+            let setting = getFakePlayer('chatroomSetting')
+            kingTag = setting.filter(str => str.startsWith('kingTag⌁')).join('').split("⌁")[1]
+            allSeeAdmin = toBool(getScore("chatroomSetting", "allSeeAdmin", true))
+            adminSeeAll = toBool(getScore("chatroomSetting", "adminSeeAll", true))
+        } catch (UwU) { }
+        if (kingTag === "" || kingTag === undefined) kingTag = "king"
+        if (allSeeAdmin === "" || allSeeAdmin === undefined) allSeeAdmin = false
+        if (adminSeeAll === "" || adminSeeAll === undefined) adminSeeAll = false
 
-            const form = new ModalFormData()
+        const form = new ModalFormData()
 
-            form.title(`§l§8» §r§7Chat Room §l§8«`)
-            form.textField(`§c§l»§r§c Subscribe §f@aitji.§r\n\n§l§a»§r§f ChatRoom §aKingTag§f ex: §o"king"§r`, `ex: "${kingTag ?? `king`}"`, kingTag)
-            form.toggle(`§e»§f Everyone See §e${kingTag ?? `king`}?`, allSeeAdmin ?? false)
-            form.toggle(`§e» §e${kingTag ?? `king`} §fSee Everyone?`, adminSeeAll ?? false)
-            form.show(pl).then(res => {
-                if (res.canceled) return
-                const resu = res.formValues
-                pl.runCommand(`scoreboard players reset * chatroomSetting`)
-                pl.runCommand(`scoreboard players set allSeeAdmin chatroomSetting 0`)
-                pl.runCommand(`scoreboard players set adminSeeAll chatroomSetting 0`)
+        form.title(`§l§8» §r§0Chat Room §l§8«`)
+        form.textField(`§c§l»§r§c Subscribe §f@aitji.§r\n\n§l§a»§r§f ChatRoom §aKingTag§f ex: §o"king", "spy"§r`, `ex: "${kingTag || `king`}"`, { defaultValue: kingTag, tooltip: "This is the tag for the king in chat room, ex: 'king'" })
+        form.toggle(`§e»§f Everyone See §e${kingTag || `king`}?`, { defaultValue: allSeeAdmin || false, tooltip: "If enabled, everyone can see the king's messages" })
+        form.toggle(`§e» §e${kingTag || `king`} §fSee Everyone?`, { defaultValue: adminSeeAll || false, tooltip: "If enabled, the king can see everyone's messages" })
+        form.show(pl).then(res => {
+            if (res.canceled) return
+            const resu = res.formValues
+            let chatroomSetting = world.scoreboard.getObjective('chatroomSetting')
+            if (!chatroomSetting) {
+                world.scoreboard.addObjective('chatroomSetting', 'Chat Room Setting')
+                chatroomSetting = world.scoreboard.getObjective('chatroomSetting')
+            }
 
-                pl.runCommand(`scoreboard players set "kingTag⌁${resu[0] ?? `king`}" chatroomSetting 0`)
-                pl.runCommand(`scoreboard players set allSeeAdmin chatroomSetting ${boolTo(resu[1])}`)
-                pl.runCommand(`scoreboard players set adminSeeAll chatroomSetting ${boolTo(resu[2])}`)
+            chatroomSetting.getParticipants().forEach(participant => chatroomSetting.removeParticipant(participant))
+            chatroomSetting.setScore(`allSeeAdmin`, Number(boolTo(resu[1])))
+            chatroomSetting.setScore(`adminSeeAll`, Number(boolTo(resu[2])))
+            chatroomSetting.setScore(`kingTag⌁${resu[0] || `king`}`, 0)
 
-                pl.sendMessage(`§fChat Distance is now §aSaved!§r`)
-            })
+            pl.sendMessage(`§fChat Room is now §aSaved!§r`)
         })
-    }
+    })
 })
 /** ________________________________________________________ */
 function getScore(objective, target, useZero = true) {
