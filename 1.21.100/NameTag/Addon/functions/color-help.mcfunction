@@ -1,0 +1,2 @@
+scoreboard objectives add color dummy "Name Color"
+tellraw @p {"rawtext":[{"translate":"§7--------------\n§fColor Help!\n0 - White\n1 - §0Black\n§f2 - §eLight Yellow§f\n3 - §gDark Yellow§f\n4 - §4Dark Red§f\n5 - §cLight Red§f\n6 - §6Orange§f\n7 - §5Purple§f\n8 - §dPink§f\n9 - §1Bue§f\n10 - §9Glow Blue?§f\n11 - §3Cyan§f\n12 - §bLight Blue§f\n13 - §2Dark Green§f\n14 - §aLight Green§f\n15 - §8Dark Grey§f\n16 - §7Light Grey\n§7--------------"}]}
