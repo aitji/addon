@@ -275,6 +275,6 @@ function servers(pl) {
  * @author aitji.
  * @description This Script was created by aitji.
  * @copyright 2023-2024 aitji.
- * @youtube https://www.youtube.com/@aitji../
+ * @youtube https://www.youtube.com/channel/UCphyxbOnunOu0FcNLYPPXJw?sub_confirmation=1/
  */
 /** ------------------------------------------- */

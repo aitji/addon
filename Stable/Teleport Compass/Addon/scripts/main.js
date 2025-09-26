@@ -33,5 +33,5 @@ function teleport(pl) {
  * @author AitJi Gamer
  * @description This Script was created by AitJi Gamer
  * @copyright 2021-2022 AitJi Gamer
- * @youtube https://www.youtube.com/@aitji.
+ * @youtube https://www.youtube.com/channel/UCphyxbOnunOu0FcNLYPPXJw?sub_confirmation=1
  */

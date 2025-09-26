@@ -26,7 +26,7 @@ I highly recommend using [my website](https://aitji.is-a.dev) to download addon!
 
 ## Follow me on social media!
 - Github: [aitji](https://github.com/aitji)
-- YouTube: [aitji.](https://www.youtube.com/@aitji..)
+- YouTube: [aitji.](https://www.youtube.com/channel/UCphyxbOnunOu0FcNLYPPXJw?sub_confirmation=1)
 - Discord: aitji
 
 ## How to download the addon
