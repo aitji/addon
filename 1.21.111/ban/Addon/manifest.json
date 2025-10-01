@@ -1,0 +1,52 @@
+{
+    "format_version": 2,
+    "header": {
+        "name": "§c@aitji. §fBan Addon",
+        "description": "",
+        "uuid": "c3dc13dc-04b9-4cc9-a726-f355c12a77fe",
+        "version": [1,21,111],
+        "min_engine_version": [
+            1,
+            19,
+            0
+        ]
+    },
+    "metadata": {
+        "authors": [
+            "aitji."
+        ],
+        "url": "https://www.youtube.com/channel/UCphyxbOnunOu0FcNLYPPXJw?sub_confirmation=1"
+    },
+    "modules": [
+        {
+            "type": "data",
+            "uuid": "085969be-0873-46b1-89d8-4ec218b49428",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        },
+        {
+            "description": "",
+            "language": "javascript",
+            "type": "script",
+            "uuid": "b33d414e-954d-4ead-9c5e-f4550ab6ed46",
+            "version": [
+                0,
+                0,
+                1
+            ],
+            "entry": "scripts/main.js"
+        }
+    ],
+	"dependencies": [{
+			"module_name": "@minecraft/server",
+			"version": "2.3.0-beta" // server \\
+		},
+        {
+			"module_name": "@minecraft/server-ui",
+			"version": "2.1.0-beta" // server-ui \
+		}
+	]
+}
