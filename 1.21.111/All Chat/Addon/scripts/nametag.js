@@ -1,5 +1,5 @@
 import { world, system, Player } from "@minecraft/server";
-import { color } from "./call/function";
+import { color, getScore } from "./call/function";
 /** _______________________________________________________________ */
 let tick = 0
 system.runInterval(() => {

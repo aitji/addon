@@ -1,6 +1,7 @@
 import { world, system } from "@minecraft/server"
 system.beforeEvents.watchdogTerminate.subscribe((d) => (d.cancel = true))
 
+const KEY = "All Chat"
 const instructions = `§cAll Chat §7ติดตั้งแล้ว
 
 §l§7#ไอเท็มที่ต้องใช้ §r§c(จำเป็น*)
@@ -33,3 +34,15 @@ world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
     if (ticks++ > 200) system.clearRun(id)
   }, 60)
 })
+
+system.afterEvents.scriptEventReceive.subscribe(({ id, message }) => {
+  if (message !== KEY) return
+  const lib = world.scoreboard.getObjective("aitjilib")
+
+  switch (id) {
+    case 'aitji-lib:heartbeat':
+      lib.addScore(`addon`, 1)
+      lib.setScore("api", 1)
+    default: return
+  }
+}, { namespaces: ["aitji-lib"] })
