@@ -23,8 +23,9 @@ export function getScore(objective, target, useZero = true) {
  * @returns {String}
  */
 export function color(pl) {
-    let colors = ["§f", `§0`, `§g`, `§e`, `§4`, `§c`, `§6`, `§5`, `§d`, `§1`, `§9`, `§3`, `§b`, `§2`, `§a`, `§8`, `§7`]
-    return colors[getScore("color", pl)]
+    const colors = ['f', '0', 'g', 'e', '4', 'c', '6', '5', 'd', '1', '9', '3', 'b', '2', 'a', '8', '7', 'h', 'i', 'j', 'm', 'n', 'p', 'q', 's', 't', 'u', 'v']
+    const user = Math.abs(getScore("color", pl) || 0) % colors.length
+    return '§' + colors[user]
 }
 /** _______________________________________________________________ */
 /**
