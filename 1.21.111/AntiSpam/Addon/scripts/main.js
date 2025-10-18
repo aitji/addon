@@ -62,7 +62,7 @@ world.beforeEvents.itemUse.subscribe(
                 }
             )
 
-            form.show(pl).then(({ canceled, formValues }) => {
+            form.show(source).then(({ canceled, formValues }) => {
                 if (canceled) return
                 const chatsettings =
                     world.scoreboard.getObjective("chatsettings") ||
@@ -73,18 +73,20 @@ world.beforeEvents.itemUse.subscribe(
                     .forEach((p) => chatsettings.removeParticipant(p))
                 chatsettings.setScore("cps", Number(formValues[0]))
                 chatsettings.setScore(`text:${formValues[1]}`, 1)
-                pl.sendMessage(`§fAntiSpam is now §aSaved!§r`)
+                source.sendMessage(`§fAntiSpam is now §aSaved!§r`)
             })
         })
 )
 
 // <aitji> if im not lazy i should use system.currentTick, so no loop need
 system.runInterval(() => {
-    const delay = world.scoreboard.getObjective("delay")
+    const delay = world.scoreboard.getObjective('delay')
+
     for (const player of world.getPlayers()) {
-        const count = delay.getScore(player) || 0
-        delay.addScore(player, -1)
-        if (count - 1 <= 0) delay.removeParticipant(player)
+        const count = getScore('delay', player, true) || 0
+
+        if (count > 0) delay.setScore(player, count - 1)
+        else delay.removeParticipant(player)
     }
 }, 20)
 

@@ -5,7 +5,7 @@
 		"description": "§cYouTube: §fAitJi Gamer\nScript Version: §a1.21.111§r",
 		"uuid": "24e1ded1-5a1c-49a2-a201-da985c71858e",
 		"version": [1,21,111],
-		"min_engine_version": [1,21,111]
+		"min_engine_version": [1, 21, 100]
 	},
 	"metadata": {
 		"authors": ["aitji."],

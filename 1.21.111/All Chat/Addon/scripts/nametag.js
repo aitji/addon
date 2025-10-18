@@ -11,9 +11,10 @@ system.runInterval(() => {
 
         if (tick >= 20) {
             tick = 0
-            const count = delay.getScore(player) || 0
-            delay.addScore(player, -1)
-            if (count - 1 <= 0) delay.removeParticipant(player)
+            const count = getScore('delay', player, true) || 0
+
+            if (count > 0) delay.setScore(player, count - 1)
+            else delay.removeParticipant(player)
         }
     }
 }, 1)
