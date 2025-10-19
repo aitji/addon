@@ -5,11 +5,7 @@
         "description": "§fThis §baddon§f Mad by §bAitJi Gamer\n§aVersion: 1.21.111",
         "uuid": "bd980f56-6f73-459d-8b7e-b892e8bb92be",
         "version": [1,21,111],
-        "min_engine_version": [
-            1,
-            19,
-            0
-        ]
+        "min_engine_version": [1,21,100]
     },
     "metadata": {
         "authors": [

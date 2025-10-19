@@ -5,11 +5,7 @@
 		"description": "§fYouTube: §c@aitji.\n§aVersion: 1.21.111",
 		"uuid": "45226bea-80c6-4140-b65c-f4cafbdf809b",
 		"version": [1,21,111],
-		"min_engine_version": [
-			1,
-			20,
-			10
-		]
+		"min_engine_version": [1,21,100]
 	},
 	"metadata": {
 		"authors": [
@@ -21,11 +17,7 @@
 		{
 			"type": "data",
 			"uuid": "70227e99-3111-4aff-87d9-b14e413e832a",
-			"version": [
-				1,
-				0,
-				0
-			]
+			"version": [1,0,0]
 		},
 		{
 			"description": "",

@@ -5,7 +5,7 @@
 		"description": "§fFully Write by §c@aitji.\nVersion: 1.21.111§r",
 		"uuid": "92196fcd-65cc-40f2-a282-e2ba0e359c5c",
 		"version": [1,21,111],
-		"min_engine_version": [1, 20, 80]
+		"min_engine_version": [1, 21, 100]
 	},
 	"metadata": {
 		"authors": ["aitji."],

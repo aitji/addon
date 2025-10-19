@@ -5,7 +5,7 @@
 		"description": "§fเขียนโดย §cAitJi Gamer\n§aVersion: 1.21.111",
 		"uuid": "033f542e-20f7-4805-8eac-183468629ae2",
 		"version": [1,21,111],
-		"min_engine_version": [1, 20, 0]
+		"min_engine_version": [1, 21, 100]
 	},
 	"metadata": {
 		"authors": ["aitji."],
