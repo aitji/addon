@@ -8,7 +8,7 @@ import { world, system, Player, ScoreboardIdentityType } from "@minecraft/server
  */
 export function getScore(objective, target, useZero = true) {
     try {
-        const obj = world.scoreboard.getObjective(objective)
+        const obj = world.scoreboard.getObjective(objective) || world.scoreboard.addObjective(objective, objective)
         if (typeof target == 'string') {
             return obj.getScore(obj.getParticipants().find(v => v.displayName == target)) || 0
         }
