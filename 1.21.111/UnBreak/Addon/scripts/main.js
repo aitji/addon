@@ -1,5 +1,6 @@
 import { Player, ScoreboardIdentityType, system, world } from "@minecraft/server"
 import { ModalFormData } from '@minecraft/server-ui'
+import "./lib"
 /** ________________________________________________ */
 /**
  * @param {String} objective 
@@ -19,25 +20,8 @@ function getScore(objective, target, useZero = true) {
     }
 }
 /** ________________________________________________ */
-/**
- * @param {number} data 
- * @returns {boolean}
- */
-function toBool(data) {
-    if (data === 0) return false
-    if (data === 1) return true
-    return false
-}
-/** ________________________________________________ */
-/**
- * @param {boolean} data 
- * @returns {number}
- */
-function boolTo(data) {
-    if (data === false) return 0
-    if (data === true) return 1
-    return 0
-}
+const toBool = (data) => data === 1
+const boolTo = (data) => data === true ? 1 : 0
 /** ________________________________________________ */
 /**
  * @param {string} scoreboardName 
@@ -78,73 +62,72 @@ system.run(() => createScore("unbreak"))
 /** ________________________________________________ */
 world.beforeEvents.playerBreakBlock.subscribe((data) => {
     const pl = data.player
-    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace] = get();
+    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace] = get()
     if (pl.hasTag(tag || "build")) return
     data.cancel = true
 
-    if (breaktext.trim() !== "") pl.sendMessage(breaktext || `§c[!] Hey Don't Break this block!`)
+    if (breaktext.trim() !== '') pl.sendMessage(breaktext || `§c[!] Hey Don't Break this block!`)
     system.run(() => {
-        if (parbreak) pl.spawnParticle('minecraft:villager_angry', { x: data.block.x + .5, y: data.block.y + 1.5, z: data.block.z + .5 })
-        if (parbreak) pl.spawnParticle('minecraft:egg_destroy_emitter', { x: data.block.x + .5, y: data.block.y + 1, z: data.block.z + .5 })
         if (popbreak) pl.runCommand(`playsound random.pop @a[r=5]`)
+        if (parbreak) {
+            pl.spawnParticle('minecraft:villager_angry', { x: data.block.x + .5, y: data.block.y + 1.5, z: data.block.z + .5 })
+            pl.spawnParticle('minecraft:egg_destroy_emitter', { x: data.block.x + .5, y: data.block.y + 1, z: data.block.z + .5 })
+        }
     })
 })
 /** ________________________________________________ */
 world.beforeEvents.playerPlaceBlock.subscribe(data => {
     const pl = data.player
-    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace] = get();
+    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace] = get()
     if (pl.hasTag(tag || "build")) return
     data.cancel = true
 
     if (placetext.trim() !== "") pl.sendMessage(placetext || `§c[!] Hey Don't Place that block!`)
     system.run(() => {
-        if (parbreak) pl.spawnParticle('minecraft:villager_angry', { x: data.block.x + .5, y: data.block.y + 1.5, z: data.block.z + .5 })
-        if (parbreak) pl.spawnParticle('minecraft:egg_destroy_emitter', { x: data.block.x + .5, y: data.block.y + 1, z: data.block.z + .5 })
-        if (popbreak) pl.runCommand(`playsound random.pop @a[r=5]`)
+        if (popplace) pl.runCommand(`playsound random.pop @a[r=5]`)
+        if (parplace) {
+            pl.spawnParticle('minecraft:villager_angry', { x: data.block.x + .5, y: data.block.y + 1.5, z: data.block.z + .5 })
+            pl.spawnParticle('minecraft:egg_destroy_emitter', { x: data.block.x + .5, y: data.block.y + 1, z: data.block.z + .5 })
+        }
     })
 })
 /** ________________________________________________ */
-world.beforeEvents.itemUse.subscribe((data) => {
-    const pl = data.source
-    const item = data.itemStack
-    if (item.typeId === "minecraft:apple" && pl.hasTag("Admin")) system.run(() => settings(pl))
-})
-/** ________________________________________________ */
-/**
- * @param {Player} pl 
- */
-function settings(pl) {
-    const form = new ModalFormData()
-    const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace] = get();
+world.beforeEvents.itemUse.subscribe(({ source, itemStack }) =>
+    itemStack.typeId === "minecraft:apple" &&
+    source.hasTag("Admin") &&
+    system.run(() => {
+        const form = new ModalFormData()
+        const [tag, breaktext, placetext, parbreak, parplace, popbreak, popplace] = get()
 
-    form.title(`§9Unbreak§r Settings`)
-    form.textField(`§fแท็กสำหรับ §eคนสร้าง:\n§f(ค่าเริ่มต้น: §7build§f)`, `เขียนแท็กที่นี่~`, { defaultValue: tag })
-    form.textField(`§fข้อความเตือน [§cตอน ทุบบล็อก§f]\n§fการเว้นว่างจะทำให้ไม่แสดงข้อความ`, `เขียนข้อความ ๆ`, { defaultValue: breaktext })
-    form.textField(`§fข้อความเตือน [§aตอน วางบล็อก§f]\n§fการเว้นว่างจะทำให้ไม่แสดงข้อความ`, `เขียนข้อความ ๆ`, { defaultValue: placetext })
+        form.title(`§9Unbreak§r Settings`)
+        form.textField(`§fแท็กสำหรับ §eคนสร้าง:\n§f(ค่าเริ่มต้น: §7build§f)`, `เขียนแท็กที่นี่~`, { defaultValue: tag })
+        form.textField(`§fข้อความเตือน [§cตอน ทุบบล็อก§f]\n§fการเว้นว่างจะทำให้ไม่แสดงข้อความ`, `เขียนข้อความ ๆ`, { defaultValue: breaktext })
+        form.textField(`§fข้อความเตือน [§aตอน วางบล็อก§f]\n§fการเว้นว่างจะทำให้ไม่แสดงข้อความ`, `เขียนข้อความ ๆ`, { defaultValue: placetext })
 
-    form.toggle(`§fพาร์ทิเคิล~ [§cตอน ทุบบล็อก§f]`, { defaultValue: parbreak })
-    form.toggle(`§fพาร์ทิเคิล~ [§aตอน วางบล็อก§f]`, { defaultValue: parplace })
+        form.toggle(`§fพาร์ทิเคิล [§cตอน ทุบบล็อก§f]`, { defaultValue: parbreak })
+        form.toggle(`§fพาร์ทิเคิล [§aตอน วางบล็อก§f]`, { defaultValue: parplace })
 
-    form.toggle(`§fเสียง §ePOP§f [§cตอน ทุบบล็อก§f]`, { defaultValue: popbreak })
-    form.toggle(`§fเสียง §ePOP§f~ [§aตอน วางบล็อก§f]`, { defaultValue: popplace })
-    form.show(pl).then((res) => {
-        if (res.canceled) return
-        const resu = res.formValues
-        const unbreak_ = world.scoreboard.getObjective('unbreak')
-        unbreak_.getParticipants().forEach(e => unbreak_.removeParticipant(e))
+        form.toggle(`§fเสียง §ePOP§f [§cตอน ทุบบล็อก§f]`, { defaultValue: popbreak })
+        form.toggle(`§fเสียง §ePOP§f [§aตอน วางบล็อก§f]`, { defaultValue: popplace })
+        form.show(source).then((res) => {
+            if (res.canceled) return
+            const resu = res.formValues
+            const unbreak_ = world.scoreboard.getObjective('unbreak')
+            unbreak_.getParticipants().forEach(e => unbreak_.removeParticipant(e))
 
-        unbreak_.setScore(`tag⌁${resu[0]}`, 2)
-        unbreak_.setScore(`breaktext⌁${resu[1]}`, 2)
-        unbreak_.setScore(`placetext⌁${resu[2]}`, 2)
-        unbreak_.setScore("parbreak", boolTo(resu[3]))
-        unbreak_.setScore("parplace", boolTo(resu[4]))
-        unbreak_.setScore("popbreak", boolTo(resu[5]))
-        unbreak_.setScore("popplace", boolTo(resu[6]))
+            unbreak_.setScore(`tag⌁${resu[0]}`, 2)
+            unbreak_.setScore(`breaktext⌁${resu[1]}`, 2)
+            unbreak_.setScore(`placetext⌁${resu[2]}`, 2)
+            unbreak_.setScore("parbreak", boolTo(resu[3]))
+            unbreak_.setScore("parplace", boolTo(resu[4]))
+            unbreak_.setScore("popbreak", boolTo(resu[5]))
+            unbreak_.setScore("popplace", boolTo(resu[6]))
 
-        pl.playSound('random.orb')
-        pl.sendMessage(`§l§aบันทึก§r§fข้อมูลแล้ว~`)
+            source.playSound('random.orb')
+            source.sendMessage(`§l§aบันทึก§r§fข้อมูลแล้ว~`)
+        })
     })
-}
+)
 /** ________________________________________________ */
 /**
  * @returns {Array}
@@ -152,19 +135,19 @@ function settings(pl) {
 function get() {
     let tag, breaktext, placetext, parbreak, parplace, popbreak, popplace
     try {
-        let setting = getFakePlayer('unbreak');
-        tag = setting.find(str => str.startsWith('tag⌁'))?.split("⌁")[1] || "build";
-        breaktext = setting.find(str => str.startsWith('breaktext⌁'))?.split("⌁")[1];
-        placetext = setting.find(str => str.startsWith('placetext⌁'))?.split("⌁")[1];
+        let setting = getFakePlayer('unbreak')
+        tag = setting.find(str => str.startsWith('tag⌁'))?.split("⌁")[1] || "build"
+        breaktext = setting.find(str => str.startsWith('breaktext⌁'))?.split("⌁")[1]
+        placetext = setting.find(str => str.startsWith('placetext⌁'))?.split("⌁")[1]
 
         parbreak = toBool(getScore("unbreak", "parbreak", true))
         parplace = toBool(getScore("unbreak", "parplace", true))
-        popbreak = toBool(getScore("unbreak", "popbreak", true))
-        popplace = toBool(getScore("unbreak", "popplace", true))
-        if (breaktext.trim() === "") breaktext = "";
-        if (placetext.trim() === "") placetext = "";
+        popbreak = toBool(getScore("unbreak", "popbreak", false))
+        popplace = toBool(getScore("unbreak", "popplace", false))
+        if (breaktext.trim() === "") breaktext = ""
+        if (placetext.trim() === "") placetext = ""
     } catch (UwU) { }
 
-    return [tag, breaktext || "§c[!] ห้ามทุบบล็อก!§r", placetext || "§c[!] ห้ามวางบล็อก!§r", parbreak, parplace, popbreak, popplace];
+    return [tag, breaktext || "§c[!] ห้ามทุบบล็อก!§r", placetext || "§c[!] ห้ามวางบล็อก!§r", parbreak, parplace, popbreak, popplace]
 }
 /** ________________________________________________ */
