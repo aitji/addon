@@ -4,7 +4,7 @@
 		"name": "(@aitji) Level System",
 		"description": "ระบบอัพเลเวลขั้นพื้นฐาน\nโดย @aitji.",
 		"uuid": "98f0e60f-ba78-46f5-91a7-6bf635cb574e",
-		"version": [0, 0, 1],
+		"version": [1,0,0],
 		"min_engine_version": [1, 19, 0]
 	},
 	"metadata": {

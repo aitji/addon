@@ -4,7 +4,7 @@
 		"name": "§cNear§fChat",
 		"description": "§fYouTube: §c@aitji§r",
 		"uuid": "3916953f-730d-4b34-8eb3-b331072f6d66",
-		"version": [0,0,1],
+		"version": [1,0,0],
 		"min_engine_version": [1,20,0]
 	},
 	"metadata": {
@@ -24,7 +24,7 @@
 			"language": "javascript",
 			"type": "script",
 			"uuid": "89af37b3-e6f4-466e-a045-a42e730170c4",
-			"version": [0,0,1],
+			"version": [1,0,0],
 			"entry": "scripts/main.js"
 		}
 	],

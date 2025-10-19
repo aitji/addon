@@ -36,11 +36,7 @@
             "language": "javascript",
             "type": "script",
             "uuid": "2d9d5620-80fd-4d33-97a2-67146f3d4470",
-            "version": [
-                0,
-                0,
-                1
-            ],
+            "version": [1,0,0],
             "entry": "scripts/Main.js"
         }
     ],

@@ -4,11 +4,7 @@
         "name": "§c- AitJi Gamer - ",
         "description": "§fServer Interface\n§7@stable",
         "uuid": "bf043d25-fc0e-4497-bde2-3d4fadd0e996",
-        "version": [
-            0,
-            0,
-            1
-        ],
+        "version": [1,0,0],
         "min_engine_version": [1,19,0]
     },
     "metadata": {
@@ -32,11 +28,7 @@
             "language": "javascript",
             "type": "script",
             "uuid": "45df2cd5-4168-4e26-b239-5af3ca276791",
-            "version": [
-                0,
-                0,
-                1
-            ],
+            "version": [1,0,0],
             "entry": "scripts/Main.js"
         }
     ],

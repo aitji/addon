@@ -4,7 +4,7 @@
 		"name": "§9Motion §fMoon",
 		"description": "§fScript by §eAitJi Gamer\n§7@stable",
 		"uuid": "c689132a-61b7-4ad2-90d1-5dd3ea3aae97",
-		"version": [0, 0, 1],
+		"version": [1,0,0],
 		"min_engine_version": [1,19,0]
 	},
 	"metadata": {
@@ -25,7 +25,7 @@
 			"language": "javascript",
 			"type": "script",
 			"uuid": "8aa56edf-5302-469f-93ad-49cbd595506a",
-			"version": [0, 0, 1],
+			"version": [1,0,0],
 			"entry": "scripts/main.js"
 		}
 	],

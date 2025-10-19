@@ -4,11 +4,7 @@
         "name": "§l§cWanted §r§fSystem§r",
         "description": "§f§fsimple wanted system by §cAitJi Gamer\n§7@stable",
         "uuid": "ff289597-3963-4c85-be6e-f963bce70271",
-        "version": [
-            0,
-            0,
-            1
-        ],
+        "version": [1,0,0],
         "min_engine_version": [1,19,0]
     },
     "modules": [
@@ -17,11 +13,7 @@
             "language": "javascript",
             "uuid": "518da58b-36fe-467a-a6a9-85dec4c40084",
             "entry": "scripts/Main.js",
-            "version": [
-                0,
-                0,
-                1
-            ]
+            "version": [1,0,0]
         }
     ],
     "dependencies": [

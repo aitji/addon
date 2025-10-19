@@ -4,7 +4,7 @@
 		"name": "§fPolice Caught §cThief",
 		"description": "§fScript by §eAitJi Gamer\n§7@stable",
 		"uuid": "89bde72b-35e0-448b-ba78-da3c43d183f9",
-		"version": [0, 0, 1],
+		"version": [1,0,0],
 		"min_engine_version": [1,19,0]
 	},
 	"metadata": {
@@ -25,7 +25,7 @@
 			"language": "javascript",
 			"type": "script",
 			"uuid": "166f3c98-847b-42e7-87a8-596df95155a3",
-			"version": [0, 0, 1],
+			"version": [1,0,0],
 			"entry": "scripts/main.js"
 		}
 	],

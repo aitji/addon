@@ -4,11 +4,7 @@
 		"name": "§cRealtime §fIn Game",
 		"description": "§fScript by §eAitJi Gamer\n§7@stable",
 		"uuid": "b1400007-cc29-4146-b39f-b62a0b236c94",
-		"version": [
-			0,
-			0,
-			1
-		],
+		"version": [1,0,0],
 		"min_engine_version": [1,19,0]
 	},
 	"metadata": {
@@ -32,11 +28,7 @@
 			"language": "javascript",
 			"type": "script",
 			"uuid": "19505db7-405e-4f22-8394-b0e5259e3581",
-			"version": [
-				0,
-				0,
-				1
-			],
+			"version": [1,0,0],
 			"entry": "scripts/main.js"
 		}
 	],
