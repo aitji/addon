@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Create update branch
+      - name: Create or switch update branch
         run: |
           BRANCH="bot-update"
           git checkout -B "$BRANCH"
@@ -33,24 +33,28 @@ jobs:
       - name: Run update script
         run: python selfUpdate.py
 
-      - name: Stage and check for changes
+      - name: Stage changes
+        run: git add -A
+
+      - name: Check for staged changes
         id: changes
         run: |
-          git add -A
           COUNT=$(git diff --cached --name-only | wc -l)
           echo "changed_files=$COUNT" >> $GITHUB_OUTPUT
+          echo "Number of staged files: $COUNT"
           if [ "$COUNT" -eq 0 ]; then
-            echo "No changes detected, exiting."
+            echo "No changes detected, exiting workflow."
             exit 0
           fi
 
       - name: Commit and push changes
         run: |
+          BRANCH="bot-update"
           git commit -m "[bot] update Download.mcpack" \
                      -m "trigger: @${{ github.actor }}" \
                      -m "path: /selfUpdate.py" \
                      -m "total: ${{ steps.changes.outputs.changed_files }} file(s)"
-          git push -u origin "$BRANCH" --force
+          git push origin "$BRANCH" --force
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
