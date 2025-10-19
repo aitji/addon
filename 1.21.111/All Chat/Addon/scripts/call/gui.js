@@ -7,13 +7,12 @@ export function anti_spam(pl) {
 	let text, cps
 	try {
 		const setting = getFakePlayer('chatsettings')
-		text =
-			setting
-				.filter(s => s.startsWith('text:'))
-				.join('')
-				.split(':')[1] || 'Hey Hey Slow Down please'
+		text = setting
+			.filter(s => s.startsWith('text:'))
+			.join('')
+			.split(':')[1] || 'Hey Hey Slow Down please'
 		cps = getScore('chatsettings', 'cps', true) || 0
-	} catch {}
+	} catch { }
 
 	const form = new ModalFormData()
 	form.title(`[§r §lServer Anti Spam§r ]`)
@@ -36,17 +35,15 @@ export function rank_chat(pl) {
 	let chatprefix, chatdef
 	try {
 		const setting = getFakePlayer('rankchat')
-		chatprefix =
-			setting
-				.filter(x => x.startsWith('chatprefix⌁'))
-				.join('')
-				.split('⌁')[1] || 'rank:'
-		chatdef =
-			setting
-				.filter(x => x.startsWith('chatdef⌁'))
-				.join('')
-				.split('⌁')[1] || '§7Player'
-	} catch {}
+		chatprefix = setting
+			.filter(x => x.startsWith('chatprefix⌁'))
+			.join('')
+			.split('⌁')[1] || 'rank:'
+		chatdef = setting
+			.filter(x => x.startsWith('chatdef⌁'))
+			.join('')
+			.split('⌁')[1] || '§7Player'
+	} catch { }
 
 	const form = new ModalFormData()
 	form.title(`§l§8» §rRankChat §l§8«`)
@@ -71,14 +68,13 @@ export function chat_room(pl) {
 	let kingTag, allSeeAdmin, adminSeeAll
 	try {
 		const setting = getFakePlayer('chatroomSetting')
-		kingTag =
-			setting
-				.filter(x => x.startsWith('kingTag⌁'))
-				.join('')
-				.split('⌁')[1] || 'king'
+		kingTag = setting
+			.filter(x => x.startsWith('kingTag⌁'))
+			.join('')
+			.split('⌁')[1] || 'king'
 		allSeeAdmin = toBool(getScore('chatroomSetting', 'allSeeAdmin', true)) || false
 		adminSeeAll = toBool(getScore('chatroomSetting', 'adminSeeAll', true)) || false
-	} catch {}
+	} catch { }
 
 	const form = new ModalFormData()
 	form.title(`§l§8» §rChat Room §l§8«`)
@@ -107,7 +103,7 @@ export function near_chat(pl) {
 		AdminBool = toBool(getScore('chatDistance', 'AdminToggle', true)) || false
 		chatRang = getScore('chatDistance', 'chatRang', true) || 15
 		TellAdminBool = toBool(getScore('chatDistance', 'TellAdminToggle', true)) || false
-	} catch {}
+	} catch { }
 	chatRang = chatRang < 1 ? '15' : chatRang
 
 	const form = new ModalFormData()
