@@ -45,9 +45,7 @@ function send_style(pl, msg) {
 		tell: toBool(getScore('chatDistance', 'TellAdminToggle', true))
 	}
 
-	for (const p of world.getPlayers()) {
-		if (p === pl) continue
-
+	for (const p of world.getPlayers({excludeNames: [pl.name]})) {
 		const sameRoom = getScore('chatroom', p, true) || 0
 		const isAdmin = p.hasTag(kingTag)
 		const plIsAdmin = pl.hasTag(kingTag)
@@ -57,7 +55,7 @@ function send_style(pl, msg) {
 		else if (plIsAdmin && allSeeAdmin) p.sendMessage(msgFormatted)
 		else if (isAdmin && adminSeeAll) p.sendMessage(msgFormatted)
 		else if (dist <= radius || chatroom === sameRoom) p.sendMessage(msgFormatted)
-		else if (toggles.msg) p.sendMessage(`§f${color(pl)}${pl.name} ได้§cส่ง§fข้อความ..`)
+		else if (toggles.msg) p.sendMessage(`§7*${color(pl)}${pl.name} ส่งข้อความ..*`)
 	}
 }
 
