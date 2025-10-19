@@ -14,11 +14,7 @@
 	"modules": [{
 			"type": "data",
 			"uuid": "122ab242-335e-4142-b8c8-6e4c1d7eceaf",
-			"version": [
-				1,
-				0,
-				0
-			]
+			"version": [1,0,0]
 		},
 		{
 			"description": "§f§lแอดออน §cห้องแชท\n§fเขียนโดย §cAitJi Gamer§r",

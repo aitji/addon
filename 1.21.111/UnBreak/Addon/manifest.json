@@ -14,11 +14,7 @@
 	"modules": [{
 			"type": "data",
 			"uuid": "c7a53b4a-4104-4312-87c9-0fd815987393",
-			"version": [
-				1,
-				0,
-				0
-			]
+			"version": [1,0,0]
 		},
 		{
 			"description": "§fFully Write by §c@aitji.§r",
