@@ -5,7 +5,7 @@
 		"description": "§cYouTube: §fAitJi Gamer\nScript Version: §a1.21.111§r",
 		"uuid": "24e1ded1-5a1c-49a2-a201-da985c71858e",
 		"version": [1,21,111],
-		"min_engine_version": [1, 19, 0]
+		"min_engine_version": [1, 21, 100]
 	},
 	"metadata": {
 		"authors": ["aitji."],
@@ -14,28 +14,24 @@
 	"modules": [{
 			"type": "data",
 			"uuid": "c7a53b4a-4104-4312-87c9-0fd815987393",
-			"version": [
-				1,
-				0,
-				0
-			]
+			"version": [1,0,0]
 		},
 		{
-			"description": "§cYouTube: §fAitJi Gamer\nScript Version: §a1.21.111§r",
-			"language": "javascript",
 			"type": "script",
+			"language": "javascript",
+			"description": "§cYouTube: §fAitJi Gamer\nScript Version: §a1.21.111§r",
 			"uuid": "d7da681a-5c2c-4951-bcf5-e1951fc267f1",
-			"version": [0, 0, 1],
-			"entry": "scripts/main.js"
+			"entry": "scripts/main.js",
+			"version": [1,0,0]
 		}
 	],
 	"dependencies": [{
 			"module_name": "@minecraft/server",
-			"version": "2.3.0-beta" // server \\
+			"version": "2.3.0-beta"
 		},
         {
 			"module_name": "@minecraft/server-ui",
-			"version": "2.1.0-beta" // server-ui \
+			"version": "2.1.0-beta"
 		}
 	]
 }

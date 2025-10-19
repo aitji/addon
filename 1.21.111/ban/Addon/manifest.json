@@ -5,38 +5,24 @@
         "description": "",
         "uuid": "c3dc13dc-04b9-4cc9-a726-f355c12a77fe",
         "version": [1,21,111],
-        "min_engine_version": [
-            1,
-            19,
-            0
-        ]
+        "min_engine_version": [1, 21, 100]
     },
     "metadata": {
-        "authors": [
-            "aitji."
-        ],
+        "authors": ["aitji."],
         "url": "https://www.youtube.com/channel/UCphyxbOnunOu0FcNLYPPXJw?sub_confirmation=1"
     },
     "modules": [
         {
             "type": "data",
             "uuid": "085969be-0873-46b1-89d8-4ec218b49428",
-            "version": [
-                1,
-                0,
-                0
-            ]
+            "version": [1,0,0]
         },
         {
             "description": "",
             "language": "javascript",
             "type": "script",
             "uuid": "b33d414e-954d-4ead-9c5e-f4550ab6ed46",
-            "version": [
-                0,
-                0,
-                1
-            ],
+            "version": [1,0,0],
             "entry": "scripts/main.js"
         }
     ],

@@ -5,7 +5,7 @@
 		"description": "§fFully Write by §c@aitji.\nVersion: 1.21.111§r",
 		"uuid": "92196fcd-65cc-40f2-a282-e2ba0e359c5c",
 		"version": [1,21,111],
-		"min_engine_version": [1, 20, 80]
+		"min_engine_version": [1, 21, 100]
 	},
 	"metadata": {
 		"authors": ["aitji."],
@@ -25,7 +25,7 @@
 			"language": "javascript",
 			"type": "script",
 			"uuid": "d7da681a-5c2c-4951-bcf5-e1951fc267f1",
-			"version": [0, 0, 1],
+			"version": [1,0,0],
 			"entry": "scripts/main.js"
 		}
 	],

@@ -4,7 +4,7 @@
 		"name": "§cHealth §fNameTag§r",
 		"description": "§fScript by §eAitJi Gamer§r\n§7@stable",
 		"uuid": "64090b04-6f18-4cbb-8382-73737553b35f",
-		"version": [0, 0, 1],
+		"version": [1,0,0],
 		"min_engine_version": [1,19,0]
 	},
 	"metadata": {
@@ -21,7 +21,7 @@
 			"language": "javascript",
 			"type": "script",
 			"uuid": "7940ef28-817a-421b-88da-f1323bafb035",
-			"version": [0, 0, 1],
+			"version": [1,0,0],
 			"entry": "scripts/main.js"
 		}
 	],

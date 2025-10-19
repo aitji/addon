@@ -4,7 +4,7 @@
         "name": "§fAFK§9 Player(s) §fStructures",
         "description": "§fMade By: §cAitJi Gamer!!",
         "uuid": "59e2110f-ed16-41b9-87fb-24d468e36001",
-        "version": [ 0, 0, 1 ],
+        "version": [ 1,0,0 ],
         "min_engine_version": [ 1, 14, 0 ]
     },
     "modules": [
@@ -12,7 +12,7 @@
             "description": "§fMade By: §cAitJi Gamer!!",
             "type": "data",
             "uuid": "a3186534-c1f5-4cc8-b9ab-0b0ddf574054",
-            "version": [0, 0, 1]
+            "version": [1,0,0]
         }
     ]
 }

@@ -32,11 +32,7 @@
             "language": "javascript",
             "type": "script",
             "uuid": "6844f4e4-2dd4-4979-a7b2-7c62abd01351",
-            "version": [
-                0,
-                0,
-                1
-            ],
+            "version": [1,0,0],
             "entry": "scripts/Main.js"
         }
     ],

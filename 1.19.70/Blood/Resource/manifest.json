@@ -4,7 +4,7 @@
         "description": "Follow '@aitji' In YouTube(s)",
         "name": "§cBlood(s) Particle §f[Resources]§r",
         "uuid": "2ac8610c-dd91-11ed-b5ea-0242ac120002",
-        "version": [0, 0, 5],
+        "version": [1,0,0],
         "min_engine_version": [1, 14, 0]
     },
     "modules": [
@@ -12,7 +12,7 @@
             "description": "",
             "type": "resources",
             "uuid": "2ac863be-dd91-11ed-b5ea-0242ac120002",
-            "version": [0, 0, 5]
+            "version": [1,0,0]
         }
     ]
 }

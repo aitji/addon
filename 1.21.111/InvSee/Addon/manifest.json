@@ -5,11 +5,7 @@
 		"description": "§fDon't Forgot to Thank aitji.\n§aVersion: 1.21.111",
         "uuid": "1ac76a5f-ec34-477d-8b0d-293534e3a35e",
         "version": [1,21,111],
-        "min_engine_version": [
-            1,
-            19,
-            50
-        ]
+        "min_engine_version": [1,21,100]
     },
     "modules": [
         {

@@ -4,7 +4,7 @@
         "name": "§cBlood§f Addon (BP)",
         "description": "§7@stable version",
         "uuid": "014a133a-e055-4df5-8d77-20541f9d61d6",
-        "version": [0, 0, 1],
+        "version": [1,0,0],
         "min_engine_version": [1,19,0]
     },
     "modules": [
@@ -12,7 +12,7 @@
             "description": "",
             "type": "resources",
             "uuid": "854a5e39-2f34-4946-a0dd-4e28fba8ea23",
-            "version": [0, 0, 1]
+            "version": [1,0,0]
         }
     ]
 }

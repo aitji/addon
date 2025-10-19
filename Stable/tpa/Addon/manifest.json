@@ -4,7 +4,7 @@
         "name": "§l§cTPA §r§fSystem§r",
         "description": "§f§fsimple tpa system by §cAitJi Gamer\n§7@stable",
         "uuid": "bc97ed1e-c89b-4cb9-8566-27dd39b030fa",
-        "version": [0,0,1],
+        "version": [1,0,0],
         "min_engine_version": [1,19,0]
     },
     "modules": [
@@ -13,7 +13,7 @@
             "language": "javascript",
             "uuid": "518da58b-36fe-467a-a6a9-85dec4c40084",
             "entry": "scripts/index.js",
-            "version": [0,0,1]
+            "version": [1,0,0]
         }
     ],
     "dependencies": [

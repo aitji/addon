@@ -4,7 +4,7 @@
 		"name": "§faitji's §cScripting",
 		"description": "§fFully Write by §c@aitji§r",
 		"uuid": "bb24d7b6-118a-4b1a-96f4-0f0847bc6a59",
-		"version": [0, 0, 1],
+		"version": [1,0,0],
 		"min_engine_version": [1, 20, 10]
 	},
 	"metadata": {
@@ -25,7 +25,7 @@
 			"language": "javascript",
 			"type": "script",
 			"uuid": "d7da681a-5c2c-4951-bcf5-e1951fc267f1",
-			"version": [0, 0, 1],
+			"version": [1,0,0],
 			"entry": "scripts/main.js"
 		}
 	],

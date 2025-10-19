@@ -4,7 +4,7 @@
 		"name": "§cBlood§f Addon (BP)",
 		"description": "§fScript by §eAitJi Gamer§r\n§7@stable version",
 		"uuid": "8635cbc6-05d8-4f5c-803d-932c64fce903",
-		"version": [0,0,1],
+		"version": [1,0,0],
 		"min_engine_version": [1,19,0]
 	},
 	"metadata": {
@@ -17,14 +17,14 @@
 		{
 			"type": "data",
 			"uuid": "57b02db9-093a-4746-8691-bad1ec85ec35",
-			"version": [0,0,1]
+			"version": [1,0,0]
 		},
 		{
 			"description": "",
 			"language": "javascript",
 			"type": "script",
 			"uuid": "f85f00fb-41d4-4c56-acab-bc0adeb900d6",
-			"version": [0,0,1],
+			"version": [1,0,0],
 			"entry": "scripts/main.js"
 		}
 	],

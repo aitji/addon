@@ -4,11 +4,7 @@
         "name": "§l§f[ §r§5T§dr§1a§bn§as§ef§6e§4r §r§l§f]§r",
         "description": "§f§lระบบ §eโอนเงิน §fให้ §eผู้เล่น §fคนอื่น!!\n§r§7@stable",
         "uuid": "f82a44a9-b331-49e1-81a9-723fc6fa5cf1",
-        "version": [
-            0,
-            0,
-            1
-        ],
+        "version": [1,0,0],
         "min_engine_version": [1,19,0]
     },
     "modules": [
@@ -17,11 +13,7 @@
             "language": "javascript",
             "uuid": "518da58b-36fe-467a-a6a9-85dec4c40084",
             "entry": "scripts/Main.js",
-            "version": [
-                0,
-                0,
-                1
-            ]
+            "version": [1,0,0]
         }
     ],
     "dependencies": [

@@ -1,8 +1,6 @@
-import { CommandPermissionLevel, CustomCommandParamType, ScoreboardIdentityType, system, world, } from "@minecraft/server"
+import { ScoreboardIdentityType, system, world, } from "@minecraft/server"
 import { ModalFormData, ActionFormData, FormCancelationReason, ModalFormResponse, ActionFormResponse, } from "@minecraft/server-ui"
-
-system.beforeEvents.watchdogTerminate.subscribe((data) => (data.cancel = true))
-system.run(() => world.sendMessage(`§c§lBan/UnBan§r§f just reloaded`))
+import "./lib"
 
 world.afterEvents.chatSend.subscribe((data) => {
     const { sender, message } = data
@@ -105,7 +103,7 @@ function admin_ui(pl) {
                         else display.push(`${key.name}`)
                     })
                     modalForm.title(`§l@aitji.'s Ban(Online)`)
-                    modalForm.dropdown(`กรุณาเลือกผู้เล่นที่ต้องการแบน`, display)
+                    modalForm.dr(`กรุณาเลือกผู้เล่นที่ต้องการแบน`, display)
                     modalForm.textField(`เหตุผล`, `(ไม่จำเป็นต้องระบุ)`)
                     forceShow(pl, modalForm).then((res1) => {
                         if (res1.formValues[0] !== 0) {

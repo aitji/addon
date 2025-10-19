@@ -10,3 +10,8 @@ package.json
 # DEV LOG
 /manifest.json
 /scripts
+
+# ignore dev files
+*.zip
+*.mcpack
+!Download*.mcpack
