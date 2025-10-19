@@ -33,26 +33,55 @@ jobs:
       - name: run update script
         id: script
         run: |
+          echo "(🐍) starting python script..."
+          echo "current directory: $(pwd)"
+          echo "files in directory:"
+          ls -la
+          echo ""
+          echo "(⚡) running selfUpdate.py..."
           START_TIME=$(date +%s)
-          python selfUpdate.py > update_log.txt 2>&1
+          python selfUpdate.py 2>&1 | tee update_log.txt
+          SCRIPT_EXIT=$?
           END_TIME=$(date +%s)
           DURATION=$((END_TIME - START_TIME))
+          echo ""
+          echo "(✓) script completed with exit code: $SCRIPT_EXIT"
+          echo "(⏱️) execution time: ${DURATION}s"
           echo "duration=${DURATION}s" >> $GITHUB_OUTPUT
-          cat update_log.txt
+          if [ $SCRIPT_EXIT -ne 0 ]; then
+            echo "(✗) error: script failed!"
+            exit 1
+          fi
 
-      - name: stage mcpack changes
+      - name: check for mcpack files and stage changes
         run: |
-          git add '**/*.mcpack' || true
+          echo "(🔍) searching for .mcpack files..."
+          MCPACK_FILES=$(find . -name "*.mcpack" -type f)
+          if [ -z "$MCPACK_FILES" ]; then
+            echo "(✗) no .mcpack files found in repository"
+          else
+            echo "(✓) found .mcpack files:"
+            echo "$MCPACK_FILES"
+          fi
+          echo ""
+          echo "(📦) staging all .mcpack files..."
+          git add -A '*.mcpack'
+          echo "(✓) staging complete"
 
       - name: collect detailed changes
         id: details
         run: |
+          echo "(🔍) checking for staged changes..."
+          git status --short
+          echo ""
+
           if git diff --cached --quiet; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
-            echo "(✗) no .mcpack changes detected"
+            echo "(✗) no .mcpack changes detected in staging area"
             exit 0
           fi
 
+          echo "(✓) changes detected!"
           echo "has_changes=true" >> $GITHUB_OUTPUT
 
           COUNT=$(git diff --cached --name-only '**/*.mcpack' | wc -l)
