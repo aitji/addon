@@ -14,18 +14,14 @@
 	"modules": [{
 			"type": "data",
 			"uuid": "6bd4f29f-e21a-43cb-87ab-1fa5af4a3745",
-			"version": [
-				1,
-				0,
-				0
-			]
+			"version": [1,0,0]
 		},
 		{
 			"description": "§fScript by §eAitJi Gamer§r",
 			"language": "javascript",
 			"type": "script",
 			"uuid": "99a362dc-1333-452d-a03f-5b5cd3f532a1",
-			"version": [0, 0, 1],
+			"version": [1,0,0],
 			"entry": "scripts/main.js"
 		}
 	],

@@ -14,7 +14,7 @@
 	"modules": [{
 			"type": "data",
 			"uuid": "c7a53b4a-4104-4312-87c9-0fd815987393",
-			"version": [ 1, 0, 0 ]
+			"version": [1,0,0]
 		},
 		{
 			"type": "script",
@@ -22,7 +22,7 @@
 			"description": "§cYouTube: §fAitJi Gamer\nScript Version: §a1.21.111§r",
 			"uuid": "d7da681a-5c2c-4951-bcf5-e1951fc267f1",
 			"entry": "scripts/main.js",
-			"version": [ 1, 0, 0 ]
+			"version": [1,0,0]
 		}
 	],
 	"dependencies": [{
