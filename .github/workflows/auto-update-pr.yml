@@ -1,4 +1,4 @@
-name: Auto Update Download.mcpack
+name: auto update download.mcpack
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   check-and-update:
-    if: ${{ !contains(github.event.head_commit.message, '[bot] update Download.mcpack') }}
+    if: ${{ !contains(github.event.head_commit.message, '[bot] update download.mcpack') }}
     runs-on: ubuntu-latest
 
     permissions:
@@ -15,22 +15,22 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout repo
+      - name: checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Python
+      - name: set up python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Configure Git
+      - name: configure git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Run update script
+      - name: run update script
         id: script
         run: |
           START_TIME=$(date +%s)
@@ -40,18 +40,22 @@ jobs:
           echo "duration=${DURATION}s" >> $GITHUB_OUTPUT
           cat update_log.txt
 
-      - name: Collect detailed changes
+      - name: stage mcpack changes
+        run: |
+          git add '**/*.mcpack' || true
+
+      - name: collect detailed changes
         id: details
         run: |
-          if git diff --quiet '**/*.mcpack'; then
+          if git diff --cached --quiet; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
-            echo "No .mcpack changes detected"
+            echo "(✗) no .mcpack changes detected"
             exit 0
           fi
 
           echo "has_changes=true" >> $GITHUB_OUTPUT
 
-          COUNT=$(git diff --name-only '**/*.mcpack' | wc -l)
+          COUNT=$(git diff --cached --name-only '**/*.mcpack' | wc -l)
           echo "changed_files=$COUNT" >> $GITHUB_OUTPUT
 
           ADDON_COUNT=$(find . -type d -name "addon" | wc -l)
@@ -68,7 +72,7 @@ jobs:
               SIZE=$(ls -lh "$file" | awk '{print $5}')
               MODIFIED_DATE=$(date -r "$file" +'%Y-%m-%d %H:%M')
 
-              if git log --all --full-history -- "$file" | grep -q "commit"; then
+              if git ls-files --error-unmatch "$file" >/dev/null 2>&1; then
                 MODIFIED_FILES="${MODIFIED_FILES}| (📝) \`${file}\` | ${SIZE} | ${MODIFIED_DATE} |\n"
                 MODIFIED_COUNT=$((MODIFIED_COUNT + 1))
               else
@@ -78,7 +82,7 @@ jobs:
 
               DETAILS="${DETAILS}| \`${file}\` | ${SIZE} | ${MODIFIED_DATE} |\n"
             fi
-          done < <(git diff --name-only '**/*.mcpack')
+          done < <(git diff --cached --name-only '**/*.mcpack')
 
           echo "added_count=$ADDED_COUNT" >> $GITHUB_OUTPUT
           echo "modified_count=$MODIFIED_COUNT" >> $GITHUB_OUTPUT
@@ -100,7 +104,6 @@ jobs:
           echo "commit_full_sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
           echo "commit_msg=$COMMIT_MSG" >> $GITHUB_OUTPUT
           echo "commit_date=$(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_OUTPUT
-          echo "workflow_run_number=${{ github.run_number }}" >> $GITHUB_OUTPUT
 
           TOTAL_SIZE=0
           MAX_SIZE=0
@@ -118,44 +121,52 @@ jobs:
                 MAX_FILE="$file"
               fi
               
-              if [ $FILE_SIZE -lt $MIN_SIZE ]; then
+              if [ $FILE_SIZE -lt $MIN_SIZE ] && [ $FILE_SIZE -gt 0 ]; then
                 MIN_SIZE=$FILE_SIZE
                 MIN_FILE="$file"
               fi
             fi
-          done < <(git diff --name-only '**/*.mcpack')
+          done < <(git diff --cached --name-only '**/*.mcpack')
 
           if [ $TOTAL_SIZE -gt 1048576 ]; then
-            TOTAL_SIZE_HR="$(echo "scale=2; $TOTAL_SIZE/1048576" | bc)MB"
+            TOTAL_SIZE_HR="$(echo "scale=2; $TOTAL_SIZE/1048576" | bc)mb"
           elif [ $TOTAL_SIZE -gt 1024 ]; then
-            TOTAL_SIZE_HR="$(echo "scale=2; $TOTAL_SIZE/1024" | bc)KB"
+            TOTAL_SIZE_HR="$(echo "scale=2; $TOTAL_SIZE/1024" | bc)kb"
           else
-            TOTAL_SIZE_HR="${TOTAL_SIZE}B"
+            TOTAL_SIZE_HR="${TOTAL_SIZE}b"
           fi
 
           if [ $MAX_SIZE -gt 1048576 ]; then
-            MAX_SIZE_HR="$(echo "scale=2; $MAX_SIZE/1048576" | bc)MB"
+            MAX_SIZE_HR="$(echo "scale=2; $MAX_SIZE/1048576" | bc)mb"
           elif [ $MAX_SIZE -gt 1024 ]; then
-            MAX_SIZE_HR="$(echo "scale=2; $MAX_SIZE/1024" | bc)KB"
+            MAX_SIZE_HR="$(echo "scale=2; $MAX_SIZE/1024" | bc)kb"
           else
-            MAX_SIZE_HR="${MAX_SIZE}B"
+            MAX_SIZE_HR="${MAX_SIZE}b"
+          fi
+
+          if [ $MIN_SIZE -eq 999999999 ]; then
+            MIN_SIZE=0
           fi
 
           if [ $MIN_SIZE -gt 1048576 ]; then
-            MIN_SIZE_HR="$(echo "scale=2; $MIN_SIZE/1048576" | bc)MB"
+            MIN_SIZE_HR="$(echo "scale=2; $MIN_SIZE/1048576" | bc)mb"
           elif [ $MIN_SIZE -gt 1024 ]; then
-            MIN_SIZE_HR="$(echo "scale=2; $MIN_SIZE/1024" | bc)KB"
+            MIN_SIZE_HR="$(echo "scale=2; $MIN_SIZE/1024" | bc)kb"
           else
-            MIN_SIZE_HR="${MIN_SIZE}B"
+            MIN_SIZE_HR="${MIN_SIZE}b"
           fi
 
-          AVG_SIZE=$((TOTAL_SIZE / COUNT))
-          if [ $AVG_SIZE -gt 1048576 ]; then
-            AVG_SIZE_HR="$(echo "scale=2; $AVG_SIZE/1048576" | bc)MB"
-          elif [ $AVG_SIZE -gt 1024 ]; then
-            AVG_SIZE_HR="$(echo "scale=2; $AVG_SIZE/1024" | bc)KB"
+          if [ $COUNT -gt 0 ]; then
+            AVG_SIZE=$((TOTAL_SIZE / COUNT))
+            if [ $AVG_SIZE -gt 1048576 ]; then
+              AVG_SIZE_HR="$(echo "scale=2; $AVG_SIZE/1048576" | bc)mb"
+            elif [ $AVG_SIZE -gt 1024 ]; then
+              AVG_SIZE_HR="$(echo "scale=2; $AVG_SIZE/1024" | bc)kb"
+            else
+              AVG_SIZE_HR="${AVG_SIZE}b"
+            fi
           else
-            AVG_SIZE_HR="${AVG_SIZE}B"
+            AVG_SIZE_HR="0b"
           fi
 
           echo "total_size=$TOTAL_SIZE_HR" >> $GITHUB_OUTPUT
@@ -168,18 +179,18 @@ jobs:
           TOTAL_MCPACK=$(find . -name "*.mcpack" | wc -l)
           echo "total_mcpack=$TOTAL_MCPACK" >> $GITHUB_OUTPUT
 
-          echo "(✓) Detected $COUNT .mcpack file(s) changed ($TOTAL_SIZE_HR total)"
+          echo "(✓) detected $COUNT .mcpack file(s) changed ($TOTAL_SIZE_HR total)"
 
-      - name: Create Pull Request
+      - name: create pull request
         if: steps.details.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: bot-update-mcpack
           base: main
-          title: "(🤖) Auto-Update: ${{ steps.details.outputs.changed_files }} .mcpack file(s) • Run #${{ github.run_number }}"
+          title: "(🤖) auto-update: ${{ steps.details.outputs.changed_files }} .mcpack file(s) • run #${{ github.run_number }}"
           body: |
-            # Package Auto-Update (🤖)
+            # package auto-update (🤖)
 
             <div align="center">
 
@@ -248,7 +259,7 @@ jobs:
             |--------|-------|
             | (👤) **author** | @${{ github.actor }} |
             | **commit message** | `${{ steps.details.outputs.commit_msg }}` |
-            | **commit(SHA)** | [`${{ steps.details.outputs.commit_sha }}`](https://github.com/${{ github.repository }}/commit/${{ steps.details.outputs.commit_full_sha }}) |
+            | **commit(sha)** | [`${{ steps.details.outputs.commit_sha }}`](https://github.com/${{ github.repository }}/commit/${{ steps.details.outputs.commit_full_sha }}) |
             | **timestamp** | `${{ steps.details.outputs.commit_date }}` |
             | **workflow** | [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
             | **branch** | `${{ github.ref_name }}` |
@@ -259,8 +270,8 @@ jobs:
             <summary><b>technical details</b></summary>
 
             - **script**: `/selfUpdate.py`
-            - **python Version**: 3.11
-            - **compression**: ZIP_DEFLATED
+            - **python version**: 3.11
+            - **compression**: zip_deflated
             - **change detection**: file checksum comparison (filecmp)
             - **runner**: ubuntu-latest
 
@@ -273,31 +284,31 @@ jobs:
             **(🎯) quick actions**
 
             [📋 view workflow](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) • 
-            [📊 compare changes](https://github.com/${{ github.repository }}/compare/main...bot-update-mcpack) • 
+            [📊 compare changes](https://github.com/${{ github.repository }}/compare/main...bot-update-mcpack)
 
             </div>
 
             ---
 
-            <sub>🤖 Automatically generated by **GitHub Actions** • Workflow run #${{ github.run_number }} • Generated at ${{ steps.details.outputs.commit_date }}</sub>
+            <sub>🤖 automatically generated by **github actions** • workflow run #${{ github.run_number }} • generated at ${{ steps.details.outputs.commit_date }}</sub>
 
-            **👨‍💻 Reviewer:** @aitji
+            **👨‍💻 reviewer:** @aitji
           commit-message: |
-            [bot] update Download.mcpack
+            [bot] update download.mcpack
 
-            📦 Updated ${{ steps.details.outputs.changed_files }} file(s)
-            💾 Total size: ${{ steps.details.outputs.total_size }}
-            👤 Triggered by: @${{ github.actor }}
-            🔗 Commit: ${{ steps.details.outputs.commit_sha }}
+            📦 updated ${{ steps.details.outputs.changed_files }} file(s)
+            💾 total size: ${{ steps.details.outputs.total_size }}
+            👤 triggered by: @${{ github.actor }}
+            🔗 commit: ${{ steps.details.outputs.commit_sha }}
           delete-branch: true
           labels: |
             🤖 bot
             📦 auto-update
 
-      - name: No changes
+      - name: no changes
         if: steps.details.outputs.has_changes == 'false'
         run: |
           echo "════════════════════════════════════════════════════"
-          echo "✅ No Download.mcpack updates needed"
-          echo "📊 All packages are up to date!"
+          echo "(✅) no download.mcpack updates needed"
+          echo "(📊) all packages are up to date!"
           echo "════════════════════════════════════════════════════"
