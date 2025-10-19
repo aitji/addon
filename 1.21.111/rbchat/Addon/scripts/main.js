@@ -1,7 +1,7 @@
 import { world, system, ScoreboardIdentityType } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 const obj = "rbchat"
-const debug = true
+const debug = false
 import "./lib"
 system.run(() => {
     cs(String(obj))
