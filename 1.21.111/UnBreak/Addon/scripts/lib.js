@@ -5,7 +5,7 @@ const KEY = "UnBreak"
 const instructions = `§cUnBreak §7ติดตั้งแล้ว
 
 §l§7#ไอเท็มที่ต้องใช้ §r§c(จำเป็น*)
-§c-รหัสไอเท็ม   §7: minecraft:apple
+§c-รหัสไอเท็ม   §7: aitji:unbreak
 §c-แท็กแอดมิน  §7: Admin
 
 §7ใช้คำสั่ง §c/tag @s add Admin §7เพื่อเข้าเป็นผู้ดูแล ของแอดออนนี้

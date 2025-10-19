@@ -37,7 +37,7 @@ function getScore(objective, target, useZero = true) {
 world.beforeEvents.itemUse.subscribe(
     ({ source, itemStack }) =>
         source.hasTag("Admin") &&
-        itemStack.typeId === "minecraft:compass" &&
+        itemStack.typeId === "aitji:antispam" &&
         system.run(() => {
             let text, cps
             try {

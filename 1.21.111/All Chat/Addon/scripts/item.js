@@ -4,9 +4,8 @@ import { anti_spam, chat_room, near_chat, rank_chat } from './call/gui'
 
 world.beforeEvents.itemUse.subscribe(
 	({ source, itemStack }) =>
-		itemStack?.typeId === 'minecraft:paper' &&
+		itemStack?.typeId === 'aitji:allchat' &&
 		source.hasTag('Admin') &&
-		itemStack.nameTag?.replace(/§./g, '').toLowerCase().trim().includes('setting') &&
 		system.run(() => {
 			const form = new ActionFormData()
 			form.title(`§bChat§f Combiner`)

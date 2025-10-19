@@ -25,7 +25,7 @@ const boolTo = (data) => data === true ? 1 : 0
 /** ________________________________________________________ */
 world.beforeEvents.itemUse.subscribe(
     ({ source, itemStack }) =>
-        itemStack?.typeId === "minecraft:paper" &&
+        itemStack?.typeId === "aitji:roomchat" &&
         source.hasTag("Admin") &&
         system.run(() => {
             let kingTag, allSeeAdmin, adminSeeAll

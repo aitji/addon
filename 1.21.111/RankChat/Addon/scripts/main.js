@@ -43,7 +43,7 @@ world.beforeEvents.chatSend.subscribe((data) => {
 /** ________________________________________________________ */
 world.beforeEvents.itemUse.subscribe(
     ({ source, itemStack }) =>
-        itemStack?.typeId === 'minecraft:compass' &&
+        itemStack?.typeId === 'aitji:rankchat' &&
         source.hasTag('Admin') &&
         system.run(() => {
             let chatprefix, chatdef

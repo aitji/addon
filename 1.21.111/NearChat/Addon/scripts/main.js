@@ -34,7 +34,7 @@ function calDis(pl1, pl2) {
 /** ________________________________________________________ */
 world.beforeEvents.itemUse.subscribe(
     ({ source, itemStack }) =>
-        itemStack?.typeId === 'minecraft:paper' &&
+        itemStack?.typeId === 'aitji:nearchat' &&
         source.hasTag('Admin') &&
         system.run(() => {
             let chatRang, messageBool, AdminBool, TellAdminBool

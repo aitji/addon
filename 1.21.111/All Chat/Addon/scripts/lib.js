@@ -5,8 +5,7 @@ const KEY = 'All Chat'
 const instructions = `§cAll Chat §7ติดตั้งแล้ว
 
 §l§7#ไอเท็มที่ต้องใช้ §r§c(จำเป็น*)
-§c-รหัสไอเท็ม   §7: minecraft:paper
-§c-ชื่อไอเท็ม    §7: setting
+§c-รหัสไอเท็ม   §7: aitji:allchat
 §c-แท็กแอดมิน  §7: Admin
 
 §l§7#ข้อมูลเพิ่มเติม§r

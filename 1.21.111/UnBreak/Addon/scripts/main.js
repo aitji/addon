@@ -93,7 +93,7 @@ world.beforeEvents.playerPlaceBlock.subscribe(data => {
 })
 /** ________________________________________________ */
 world.beforeEvents.itemUse.subscribe(({ source, itemStack }) =>
-    itemStack.typeId === "minecraft:apple" &&
+    itemStack.typeId === "aitji:unbreak" &&
     source.hasTag("Admin") &&
     system.run(() => {
         const form = new ModalFormData()

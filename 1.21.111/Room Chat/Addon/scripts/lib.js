@@ -5,7 +5,7 @@ const KEY = "Room Chat"
 const instructions = `§cRoom Chat §7ติดตั้งแล้ว
 
 §l§7#ไอเท็มที่ต้องใช้ §r§c(จำเป็น*)
-§c-รหัสไอเท็ม   §7: minecraft:paper
+§c-รหัสไอเท็ม   §7: aitji:roomchat
 §c-แท็กแอดมิน  §7: Admin
 
 §7ใช้คำสั่ง §c/tag @s add Admin §7เพื่อเข้าเป็นผู้ดูแล ของแอดออนนี้
