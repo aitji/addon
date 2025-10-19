@@ -33,15 +33,18 @@ jobs:
       - name: Run update script
         run: python selfUpdate.py
 
-      - name: Stage changes
-        run: git add -A
+      - name: Debug - list files after Python run
+        run: ls -R
+
+      - name: Stage only .mcpack changes
+        run: git add '**/*.mcpack'
 
       - name: Check for staged changes
         id: changes
         run: |
           COUNT=$(git diff --cached --name-only | wc -l)
           echo "changed_files=$COUNT" >> $GITHUB_OUTPUT
-          echo "Number of staged files: $COUNT"
+          echo "Number of staged .mcpack files: $COUNT"
           if [ "$COUNT" -eq 0 ]; then
             echo "No changes detected, exiting workflow."
             exit 0
