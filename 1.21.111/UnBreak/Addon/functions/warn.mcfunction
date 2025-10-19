@@ -4,7 +4,7 @@ execute unless score counter "aitjilib" matches ..99999 run scoreboard players 
 execute unless score counter "aitjilib" matches ..99999 run scoreboard players set heartbeat "aitjilib" 0
 execute unless score counter "aitjilib" matches ..99999 run scriptevent aitji-lib:heartbeat
 
-execute unless score heartbeat "aitjilib" matches 1 run scriptevent aitji-lib:heartbeat Room Chat
+execute unless score heartbeat "aitjilib" matches 1 run scriptevent aitji-lib:heartbeat UnBreak
 execute unless score heartbeat "aitjilib" matches 1 run scoreboard players set heartbeat "aitjilib" 1
 
 scoreboard players remove counter "aitjilib" 1
