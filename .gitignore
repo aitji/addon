@@ -6,6 +6,7 @@ package-lock.json
 package.json
 **/UUID
 *.py
+!selfUpdate.py
 
 # DEV LOG
 /manifest.json
