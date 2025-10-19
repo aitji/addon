@@ -53,11 +53,15 @@ jobs:
       - name: Commit and push changes
         run: |
           BRANCH="bot-update"
-          git commit -m "[bot] update Download.mcpack" \
-                     -m "trigger: @${{ github.actor }}" \
-                     -m "path: /selfUpdate.py" \
-                     -m "total: ${{ steps.changes.outputs.changed_files }} file(s)"
-          git push origin "$BRANCH" --force
+          if git diff --cached --quiet; then
+            echo "No changes to commit, skipping push."
+          else
+            git commit -m "[bot] update Download.mcpack" \
+                      -m "trigger: @${{ github.actor }}" \
+                      -m "path: /selfUpdate.py" \
+                      -m "total: ${{ steps.changes.outputs.changed_files }} file(s)"
+            git push origin "$BRANCH" --force
+          fi
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
