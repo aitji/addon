@@ -1,4 +1,4 @@
-name: Trigger Python and Create PR
+name: Auto Update Download.mcpack
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  run-script:
+  check-and-update:
     if: ${{ !contains(github.event.head_commit.message, '[bot] update Download.mcpack') }}
     runs-on: ubuntu-latest
 
@@ -17,63 +17,62 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Create or switch update branch
+      - name: Configure Git
         run: |
-          BRANCH="bot-update"
-          git checkout -B "$BRANCH"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Run update script
         run: python selfUpdate.py
 
-      - name: Debug - list files after Python run
-        run: ls -R
-
-      - name: Stage only .mcpack changes
-        run: git add '**/*.mcpack'
-
-      - name: Check for staged changes
+      - name: Check for .mcpack changes
         id: changes
         run: |
-          COUNT=$(git diff --cached --name-only | wc -l)
-          echo "changed_files=$COUNT" >> $GITHUB_OUTPUT
-          echo "Number of staged .mcpack files: $COUNT"
-          if [ "$COUNT" -eq 0 ]; then
-            echo "No changes detected, exiting workflow."
-            exit 0
-          fi
-
-      - name: Commit and push changes
-        run: |
-          BRANCH="bot-update"
-          if git diff --cached --quiet; then
-            echo "No changes to commit, skipping push."
+          # Check if any .mcpack files were modified
+          if git diff --quiet '**/*.mcpack'; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "changed_files=0" >> $GITHUB_OUTPUT
+            echo "No .mcpack changes detected"
           else
-            git commit -m "[bot] update Download.mcpack" \
-                      -m "trigger: @${{ github.actor }}" \
-                      -m "path: /selfUpdate.py" \
-                      -m "total: ${{ steps.changes.outputs.changed_files }} file(s)"
-            git push origin "$BRANCH" --force
+            COUNT=$(git diff --name-only '**/*.mcpack' | wc -l)
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "changed_files=$COUNT" >> $GITHUB_OUTPUT
+            echo "Detected $COUNT .mcpack file(s) changed"
           fi
 
-      - name: Create pull request
+      - name: Create Pull Request
+        if: steps.changes.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: bot-update
+          branch: bot-update-mcpack
           base: main
           title: "[bot] update Download.mcpack"
           body: |
-            **Auto Update Triggered by:** @${{ github.actor }}
-            **Script Path:** `/selfUpdate.py`
-            **Files Changed:** `${{ steps.changes.outputs.changed_files }}` file(s)
+            ## Automated Update
 
-            Please review and approve: @aitji
-          commit-message: "[bot] update Download.mcpack"
+            **Triggered by:** @${{ github.actor }}
+            **Script:** `/selfUpdate.py`
+            **Files Changed:** ${{ steps.changes.outputs.changed_files }} file(s)
+
+            ---
+
+            Please review and merge: @aitji
+          commit-message: |
+            [bot] update Download.mcpack
+
+            Triggered by: @${{ github.actor }}
+            Files updated: ${{ steps.changes.outputs.changed_files }}
+          delete-branch: true
+
+      - name: No changes
+        if: steps.changes.outputs.has_changes == 'false'
+        run: echo "(✓) No Download.mcpack updates needed"
