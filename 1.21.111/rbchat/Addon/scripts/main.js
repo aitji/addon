@@ -2,10 +2,8 @@ import { world, system, ScoreboardIdentityType } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 const obj = "rbchat"
 const debug = true
-
-system.beforeEvents.watchdogTerminate.subscribe(data => data.cancel = true)
+import "./lib"
 system.run(() => {
-    world.sendMessage(`§7§l| §r§9RBChat§f has been §cReloaded§r`)
     cs(String(obj))
     cs(String(`${obj}.setting`))
 })
@@ -23,16 +21,16 @@ world.beforeEvents.itemUse.subscribe((data) => {
             } = gvIng()
 
             form.title(`§l§pRB Chat's§r Setting`)
-            form.textField(`§m»§f ระยะเวลาก่อน§mแชทจะหาย§fไป\n§7(โดยใช้ §ltick§r§7 | โดยที่ §l20tick§r§7 เท่ากับ §l1s§r§7)`, `เช่น › §l60§r`, { defaultValue: hide_ })
-            form.textField(`§4»§f จำนวนข้อความสูงสุดที่แสดงก่อนจะ§4ถูกตัด`, `เช่น › §l16§r`, { defaultValue: maxMsg_ })
-            form.textField(`§c»§f คำสุดท้ายก่อนข้อความจะ§4ถูกตัด§f\n§7(ตัวอย่าง "§lHello Wo..§r§7")`, `เช่น › §l..§r`, { defaultValue: cutoffMsg_ })
+            form.textField(`§m»§f ระยะเวลาก่อน§mแชทจะหาย§fไป\n§7(โดยใช้ §ltick§r§7 | โดยที่ §l20tick§r§7 เท่ากับ §l1s§r§7)`, `เช่น: §l60§r`, { defaultValue: hide_ })
+            form.textField(`§4»§f จำนวนข้อความสูงสุดที่แสดงก่อนจะ§4ถูกตัด`, `เช่น: §l16§r`, { defaultValue: maxMsg_ })
+            form.textField(`§c»§f คำสุดท้ายก่อนข้อความจะ§4ถูกตัด§f\n§7(ตัวอย่าง "§lHello Wo..§r§7")`, `เช่น: §l..§r`, { defaultValue: cutoffMsg_ })
             form.toggle(`§6»§f เสียงเมื่อ§6ส่งข้อความ`, { defaultValue: cov(true, sound_) })
-            form.textField(`§p»§f ประเภทของ§pเสียง§fที่จะเล่น`, `เช่น › §lrandom.pop§r`, { defaultValue: soundType_ })
-            form.textField(`§g»§f ระยะทางของ§gเสียง`, `เช่น › §l@a[r=>>...<<]§r`, { defaultValue: soundLength_ })
-            form.textField(`§e»§f จำนวน§eบรรทัด§fสูงสุดสำหรับการแสดงใน§eป้ายชื่อ`, `เช่น › §l3§r`, { defaultValue: maxLine_ })
-            form.textField(`§q»§f ข้อความ§qระหว่าง§fชื่อและแชท`, `เช่น › §l\\n\\n§r`, { defaultValue: below_ })
+            form.textField(`§p»§f ประเภทของ§pเสียง§fที่จะเล่น`, `เช่น: §lrandom.pop§r`, { defaultValue: soundType_ })
+            form.textField(`§g»§f ระยะทางของ§gเสียง`, `เช่น: §l@a[r=>>...<<]§r`, { defaultValue: soundLength_ })
+            form.textField(`§e»§f จำนวน§eบรรทัด§fสูงสุดสำหรับการแสดงใน§eป้ายชื่อ`, `เช่น: §l3§r`, { defaultValue: maxLine_ })
+            form.textField(`§q»§f ข้อความ§qระหว่าง§fชื่อและแชท`, `เช่น: §l\\n\\n§r`, { defaultValue: below_ })
             form.toggle(`§2»§f เปิดใช้งานสี§2จางลง§fเมื่อใกล้หาย`, { defaultValue: cov(true, colorBoo_) })
-            form.textField(`§a»§f สไตล์หน้าข้อความ`, `เช่น › §o§l$§r§oo§r §r§7$=unicode(U+00A7)`, { defaultValue: base_ })
+            form.textField(`§a»§f สไตล์หน้าข้อความ`, `เช่น: §o§l$§r§oo§r §r§7$=unicode(U+00A7)`, { defaultValue: base_ })
             form.show(pl).then((res) => {
                 if (res.canceled) return
                 pl.playSound('random.pop')
@@ -70,9 +68,7 @@ const cov = (ntb, i) => ntb ? String(i) === "1" : i ? "1" : "0";
 const os = () => Math.floor(Date.now() / 1000)
 function gvIng(o = obj) {
     const l = get(`${o}.setting`);
-    const gv = (k, v) => (
-        l.find(r => r.startsWith(`${k}|`)
-        ) || "").split(`${k}|`)[1] || v
+    const gv = (k, v) => (l.find(r => r.startsWith(`${k}|`)) || "").split(`${k}|`)[1] || v
 
     return {
         hide_: gv('hide', '60'),
@@ -112,7 +108,7 @@ function get(id, end = "") {
 
 function gsc(oj, pla) {
     try {
-        const obj = world.scoreboard.getObjective(oj)
+        const obj = world.scoreboard.getObjective(oj) || world.scoreboard.addObjective(oj)
         if (typeof pla == 'string') {
             return obj.getScore(obj.getParticipants().find(v => v.displayName == pla)) || 0
         }
