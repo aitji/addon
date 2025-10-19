@@ -65,7 +65,8 @@ jobs:
           fi
           echo ""
           echo "(📦) staging all .mcpack files..."
-          git add -A '*.mcpack'
+          git add '**/*.mcpack'
+          git reset HEAD update_log.txt 2>/dev/null || true
           echo "(✓) staging complete"
 
       - name: collect detailed changes

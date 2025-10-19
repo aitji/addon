@@ -16,3 +16,6 @@ package.json
 *.zip
 *.mcpack
 !Download*.mcpack
+
+# bot file
+update_log.txt
