@@ -23,10 +23,17 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Create update branch
+        run: |
+          BRANCH="bot-update"
+          git checkout -B "$BRANCH"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Run update script
         run: python selfUpdate.py
 
-      - name: Check for changes
+      - name: Stage and check for changes
         id: changes
         run: |
           git add -A
@@ -37,12 +44,8 @@ jobs:
             exit 0
           fi
 
-      - name: Create update branch
+      - name: Commit and push changes
         run: |
-          BRANCH="bot-update"
-          git checkout -B "$BRANCH"
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "[bot] update Download.mcpack" \
                      -m "trigger: @${{ github.actor }}" \
                      -m "path: /selfUpdate.py" \
@@ -57,3 +60,9 @@ jobs:
           base: main
           title: "[bot] update Download.mcpack"
           body: |
+            **Auto Update Triggered by:** @${{ github.actor }}
+            **Script Path:** `/selfUpdate.py`
+            **Files Changed:** `${{ steps.changes.outputs.changed_files }}` file(s)
+
+            Please review and approve: @aitji
+          commit-message: "[bot] update Download.mcpack"
