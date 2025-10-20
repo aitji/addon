@@ -30,6 +30,6 @@ I highly recommend using [my website](https://aitji.is-a.dev) to download addon!
 - Discord: aitji
 
 ## How to download the addon
-Don't worry, it's easy! Just check out [my website](https://mcbe.vercel.app/new), if you can't read thai you may use translate (sorry!)
+Don't worry, it's easy! Just check out [my website](https://aitji.is-a.dev), if you can't read thai you may use translate (sorry!)
 
 the addon will be gride can choose.
