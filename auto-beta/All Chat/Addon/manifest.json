@@ -1,0 +1,37 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "§bAll §fChat",
+		"description": "§cYouTube: §fAitJi Gamer\nScript Version: §abeta§r",
+		"uuid": "24e1ded1-5a1c-49a2-a201-da985c71858e",
+		"version": [1,21,130],
+		"min_engine_version": [1, 21, 100]
+	},
+	"metadata": {
+		"authors": ["aitji."],
+		"url": "https://www.youtube.com/channel/UCphyxbOnunOu0FcNLYPPXJw?sub_confirmation=1"
+	},
+	"modules": [{
+			"type": "data",
+			"uuid": "c7a53b4a-4104-4312-87c9-0fd815987393",
+			"version": [1,0,0]
+		},
+		{
+			"type": "script",
+			"language": "javascript",
+			"description": "§cYouTube: §fAitJi Gamer\nScript Version: §abeta§r",
+			"uuid": "d7da681a-5c2c-4951-bcf5-e1951fc267f1",
+			"entry": "scripts/main.js",
+			"version": [1,0,0]
+		}
+	],
+	"dependencies": [{
+			"module_name": "@minecraft/server",
+			"version": "beta"
+		},
+        {
+			"module_name": "@minecraft/server-ui",
+			"version": "beta"
+		}
+	]
+}
