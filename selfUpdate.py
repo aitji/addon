@@ -1,16 +1,39 @@
 import os
 import shutil
 import zipfile
-import filecmp
+import hashlib
+
+
+FIXED_DATE = (1984, 1, 1, 0, 0, 0) ## swarms, ykyk ;p
 
 
 def zip_folder(folder_path, zip_file_name):
+    file_list = []
+
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            file_path = os.path.join(root, file)
+            relative_path = os.path.relpath(file_path, folder_path)
+            file_list.append((file_path, relative_path))
+
+    file_list.sort(key=lambda x: x[1])
+
     with zipfile.ZipFile(zip_file_name, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        for root, dirs, files in os.walk(folder_path):
-            for file in files:
-                file_path = os.path.join(root, file)
-                relative_path = os.path.relpath(file_path, folder_path)
-                zipf.write(file_path, relative_path)
+        for file_path, relative_path in file_list:
+            info = zipfile.ZipInfo(relative_path)
+            info.date_time = FIXED_DATE
+            info.compress_type = zipfile.ZIP_DEFLATED
+
+            with open(file_path, 'rb') as f:
+                zipf.writestr(info, f.read())
+
+
+def sha256(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for chunk in iter(lambda: f.read(8192), b''):
+            h.update(chunk)
+    return h.hexdigest()
 
 
 def process_folders(root_folder):
@@ -48,8 +71,7 @@ def process_folders(root_folder):
 
             needs_update = True
             if os.path.exists(target_file):
-                needs_update = not filecmp.cmp(
-                    temp_zip, target_file, shallow=False)
+                needs_update = sha256(temp_zip) != sha256(target_file)
 
             if needs_update:
                 if os.path.exists(target_file):
@@ -68,11 +90,11 @@ def process_folders(root_folder):
                 updated_count += 1
             else:
                 size = os.path.getsize(target_file)
-                print(f"(✓) unchanged: {target_file} ({size:,} bytes)")
+                print(f"(✅) unchanged: {target_file} ({size:,} bytes)")
                 skipped_count += 1
 
         except Exception as e:
-            print(f"(✗) error processing {folder}: {str(e)}")
+            print(f"(❎) error processing {folder}: {str(e)}")
 
         finally:
             if os.path.exists(temp_dir):
@@ -102,7 +124,7 @@ def main():
     if updated > 0:
         print(f"\n(✅) successfully updated {updated} file(s)!")
     else:
-        print(f"\n(✓) all files are up to date!")
+        print(f"\n(✅) all files are up to date!")
 
 
 if __name__ == "__main__":
